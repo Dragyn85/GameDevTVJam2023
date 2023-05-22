@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerScale : MonoBehaviour
 {
     [SerializeField] private float scaleSpeed = 10f;
-    [SerializeField] private float minScale = 0.01f;
-    [SerializeField] private float maxScale = 100f;
+    [SerializeField] private float minScale = 1;
+    [SerializeField] private float maxScale = 10f;
     [SerializeField] private float startScale = 1f;
 
     private float currentScale;
@@ -15,27 +15,27 @@ public class PlayerScale : MonoBehaviour
     
     private void Start()
     {
-        currentScale = transform.localScale.x;
+        SetScale(startScale);
+
     }
 
     void Update()
     {
         if (Input.GetKey(KeyCode.E))
         {
-            currentScale += scaleSpeed * Time.deltaTime;
-            SetScale();
+            float newScale = currentScale + scaleSpeed * Time.deltaTime;
+            SetScale(newScale);
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            currentScale -= scaleSpeed * Time.deltaTime;
-            currentScale = Mathf.Clamp(currentScale, minScale, maxScale);
-            transform.localScale = Vector3.one * currentScale;
+            float newScale = currentScale - scaleSpeed * Time.deltaTime;
+            SetScale(newScale);
         }
     }
 
-    private void SetScale()
+    private void SetScale(float scale)
     {
-        currentScale = Mathf.Clamp(currentScale, minScale, maxScale);
+        currentScale = Mathf.Clamp(scale, minScale, maxScale);
         transform.localScale = Vector3.one * currentScale;
     }
 }
