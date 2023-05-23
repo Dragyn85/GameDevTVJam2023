@@ -15,7 +15,7 @@ public class PlayerScale : MonoBehaviour
     
     private void Start()
     {
-        SetScale(startScale);
+        transform.localScale = Vector3.one * startScale;
 
     }
 
