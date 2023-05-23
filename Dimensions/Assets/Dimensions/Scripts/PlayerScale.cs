@@ -8,6 +8,7 @@ public class PlayerScale : MonoBehaviour
     [SerializeField] private float scaleSpeed = 10f;
     [SerializeField] private float minScale = 0.01f;
     [SerializeField] private float maxScale = 100f;
+    [SerializeField] private float startScale = 1f;
 
     private float currentScale;
 
@@ -22,8 +23,7 @@ public class PlayerScale : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             currentScale += scaleSpeed * Time.deltaTime;
-            currentScale = Mathf.Clamp(currentScale, minScale, maxScale);
-            transform.localScale = Vector3.one * currentScale;
+            SetScale();
         }
         if (Input.GetKey(KeyCode.Q))
         {
@@ -31,5 +31,11 @@ public class PlayerScale : MonoBehaviour
             currentScale = Mathf.Clamp(currentScale, minScale, maxScale);
             transform.localScale = Vector3.one * currentScale;
         }
+    }
+
+    private void SetScale()
+    {
+        currentScale = Mathf.Clamp(currentScale, minScale, maxScale);
+        transform.localScale = Vector3.one * currentScale;
     }
 }
