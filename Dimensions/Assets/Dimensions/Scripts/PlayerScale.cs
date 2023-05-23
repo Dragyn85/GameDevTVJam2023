@@ -23,6 +23,7 @@ public class PlayerScale : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             currentScale += scaleSpeed * Time.deltaTime;
+            currentScale =  Mathf.Clamp(currentScale, minScale, maxScale);
             SetScale();
         }
         if (Input.GetKey(KeyCode.Q))
