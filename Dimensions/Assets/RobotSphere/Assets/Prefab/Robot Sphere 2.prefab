@@ -1430,9 +1430,9 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4175201348320748171}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a3a82a23aadf3964dbc3814d84906496, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.04601708
   m_Center: {x: 0.00018366985, y: 0.00004537589, z: 0}
@@ -1447,6 +1447,7 @@ GameObject:
   - component: {fileID: 4178082247217800845}
   - component: {fileID: 4143673269133289543}
   - component: {fileID: 4154059471591130347}
+  - component: {fileID: 8699037643772803519}
   m_Layer: 0
   m_Name: right_plate
   m_TagString: Untagged
@@ -1519,6 +1520,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8699037643772803519
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175207884561202573}
+  m_Material: {fileID: 13400000, guid: a3a82a23aadf3964dbc3814d84906496, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300036, guid: bff429107601444d59c67940e6ad78c4, type: 3}
 --- !u!1 &4175225488832686181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,6 +2254,7 @@ GameObject:
   - component: {fileID: 4177964755051171457}
   - component: {fileID: 4143732195368138083}
   - component: {fileID: 4153854584184062273}
+  - component: {fileID: 5120288581875779213}
   m_Layer: 0
   m_Name: left_plate
   m_TagString: Untagged
@@ -2311,6 +2327,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5120288581875779213
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175349023890320099}
+  m_Material: {fileID: 13400000, guid: a3a82a23aadf3964dbc3814d84906496, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300062, guid: bff429107601444d59c67940e6ad78c4, type: 3}
 --- !u!1 &4175358182976449429
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,6 +2435,7 @@ GameObject:
   - component: {fileID: 4177944335132936303}
   - component: {fileID: 4081969237681443109}
   - component: {fileID: 6646377064423032492}
+  - component: {fileID: -2115868160958576589}
   m_Layer: 0
   m_Name: Robot Sphere 2
   m_TagString: Untagged
@@ -2426,7 +2457,7 @@ Transform:
   m_Children:
   - {fileID: 4171581862299776901}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4081969237681443109
 Animator:
@@ -2460,6 +2491,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56bf28ded708b14aaa6038da3b6ca1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &-2115868160958576589
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175358825717671319}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &4175361140706720129
 GameObject:
   m_ObjectHideFlags: 0
@@ -3230,6 +3277,7 @@ GameObject:
   - component: {fileID: 4177902945910555539}
   - component: {fileID: 4143647993985135777}
   - component: {fileID: 4152342636829030807}
+  - component: {fileID: 4726506207326897982}
   m_Layer: 0
   m_Name: rear_plate
   m_TagString: Untagged
@@ -3302,6 +3350,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4726506207326897982
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175668738893574607}
+  m_Material: {fileID: 13400000, guid: a3a82a23aadf3964dbc3814d84906496, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300010, guid: bff429107601444d59c67940e6ad78c4, type: 3}
 --- !u!1 &4175668810230431359
 GameObject:
   m_ObjectHideFlags: 0
