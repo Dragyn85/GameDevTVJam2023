@@ -382,7 +382,7 @@ Transform:
   - {fileID: 6817638360860843947}
   - {fileID: 1574925817}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6817638361354391146
 CapsuleCollider:
@@ -680,5 +680,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleSpeed: 10
-  minScale: 0.01
-  maxScale: 100
+  minScale: 0.1
+  maxScale: 6
+  startScale: 1
