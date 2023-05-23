@@ -36,7 +36,7 @@ public class RobotFreeAnimEditor : Editor
 
 	public override void OnInspectorGUI()
     {
-		GUI.DrawTexture(rect, testImage);
+		//GUI.DrawTexture(rect, testImage);
 		style.wordWrap = true;
 		DrawText("*Upgrades*\n", 35, new Color(1f, 0.2373f, 0f, 1f));
 		GUILayout.Space(10);
