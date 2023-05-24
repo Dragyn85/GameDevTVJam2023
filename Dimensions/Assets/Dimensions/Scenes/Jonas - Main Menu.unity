@@ -1305,11 +1305,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: David
       objectReference: {fileID: 0}
-    - target: {fileID: 1079960570424612749, guid: 221e4de062e03b4418e19298ea5334d8,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.176
-      objectReference: {fileID: 0}
     - target: {fileID: 2913958636755857688, guid: 221e4de062e03b4418e19298ea5334d8,
         type: 3}
       propertyPath: m_RootOrder
