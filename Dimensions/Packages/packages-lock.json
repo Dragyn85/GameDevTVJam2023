@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.davehopetech.extensions.dependency": {
+      "version": "https://github.com/DavidJH2/_Unity_Custom_Extensions_Package.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f63d41f3d3a2f1679a50cf910696be4bc898df54"
+    },
     "com.davehopetech.tool.dependency": {
       "version": "https://github.com/DavidJH2/_Unity_Custom_Tools_Package.git",
       "depth": 0,

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.davehopetech.extensions.dependency": "https://github.com/DavidJH2/_Unity_Custom_Extensions_Package.git",
     "com.davehopetech.tool.dependency": "https://github.com/DavidJH2/_Unity_Custom_Tools_Package.git",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "1.17.6",
