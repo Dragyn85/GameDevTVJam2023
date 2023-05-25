@@ -1,6 +1,3 @@
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
@@ -10,6 +7,10 @@ public class MovementInput : MonoBehaviour {
 
     public float Velocity;
     [Space]
+    
+    [Tooltip("True: Means this Character will move with the Horizontal x-axis inverted: Left is Right, Right is Left.")]
+    [SerializeField]
+    private bool _invertHorizontalDirectionMovement = false;
 
 	public float InputX;
 	public float InputZ;
@@ -32,19 +33,32 @@ public class MovementInput : MonoBehaviour {
     public float StartAnimTime = 0.3f;
     [Range(0, 1f)]
     public float StopAnimTime = 0.15f;
+    
+    private static readonly int _Blend = Animator.StringToHash("Blend");
 
     public float verticalVel;
-    private Vector3 moveVector;
+    private Vector3 _moveVector;
 
-	// Use this for initialization
-	void Start () {
-		anim = this.GetComponent<Animator> ();
-		cam = Camera.main;
-		controller = this.GetComponent<CharacterController> ();
-	}
+    
+    void Awake ()
+    {
+	    anim = this.GetComponent<Animator> ();
+	    cam = Camera.main;
+	    controller = this.GetComponent<CharacterController> ();
+    }
+    
+    //// Use this for initialization
+	// void Start ()
+	// {
+	// 	anim = this.GetComponent<Animator> ();
+	// 	cam = Camera.main;
+	// 	controller = this.GetComponent<CharacterController> ();
+	// }
+	
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		InputMagnitude ();
 
         isGrounded = controller.isGrounded;
@@ -56,19 +70,32 @@ public class MovementInput : MonoBehaviour {
         {
             verticalVel -= 1;
         }
-        moveVector = new Vector3(0, verticalVel * .2f * Time.deltaTime, 0);
-        controller.Move(moveVector);
+        _moveVector = new Vector3(0, verticalVel * .2f * Time.deltaTime, 0);
+        controller.Move(_moveVector);
 
 
     }
 
-    void PlayerMoveAndRotation() {
+    void PlayerMoveAndRotation()
+    {
 		InputX = Input.GetAxis ("Horizontal");
 		InputZ = Input.GetAxis ("Vertical");
+		
+		// Calculate the real Horizontal Direction:
+		//
+		if (_invertHorizontalDirectionMovement)
+		{
+			InputX *= -1.0f;
+		}
+		// else
+		// {
+		// 	
+		// }//End if (_invertHorizontalDirectionMovement)
 
-		var camera = Camera.main;
-		var forward = cam.transform.forward;
-		var right = cam.transform.right;
+		// Original code:   var camera = Camera.main;
+		var transform1 = cam.transform;
+		var forward = transform1.forward;
+		var right = transform1.right;
 
 		forward.y = 0f;
 		right.y = 0f;
@@ -76,11 +103,14 @@ public class MovementInput : MonoBehaviour {
 		forward.Normalize ();
 		right.Normalize ();
 
+		// Here the Movement Direction is calculated:
+		//
 		desiredMoveDirection = forward * InputZ + right * InputX;
 
-		if (blockRotationPlayer == false) {
+		if (blockRotationPlayer == false)
+		{
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
-            controller.Move(desiredMoveDirection * Time.deltaTime * Velocity);
+            controller.Move(desiredMoveDirection * (Time.deltaTime * Velocity));
 		}
 	}
 
@@ -92,19 +122,32 @@ public class MovementInput : MonoBehaviour {
     public void RotateToCamera(Transform t)
     {
 
-        var camera = Camera.main;
-        var forward = cam.transform.forward;
-        var right = cam.transform.right;
+        // Original:   var camera = Camera.main;
+        var transform1 = cam.transform;
+        var forward = transform1.forward;
+        var right = transform1.right;
 
         desiredMoveDirection = forward;
 
         t.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
     }
 
-	void InputMagnitude() {
+	void InputMagnitude()
+	{
 		//Calculate Input Vectors
 		InputX = Input.GetAxis ("Horizontal");
 		InputZ = Input.GetAxis ("Vertical");
+		
+		// Calculate the real Horizontal Direction:
+		//
+		if (_invertHorizontalDirectionMovement)
+		{
+			InputX *= -1.0f;
+		}
+		// else
+		// {
+		// 	
+		// }//End if (_invertHorizontalDirectionMovement)
 
 		//anim.SetFloat ("InputZ", InputZ, VerticalAnimTime, Time.deltaTime * 2f);
 		//anim.SetFloat ("InputX", InputX, HorizontalAnimSmoothTime, Time.deltaTime * 2f);
@@ -114,11 +157,14 @@ public class MovementInput : MonoBehaviour {
 
         //Physically move player
 
-		if (Speed > allowPlayerRotation) {
-			anim.SetFloat ("Blend", Speed, StartAnimTime, Time.deltaTime);
+		if (Speed > allowPlayerRotation)
+		{
+			anim.SetFloat (_Blend, Speed, StartAnimTime, Time.deltaTime);
 			PlayerMoveAndRotation ();
-		} else if (Speed < allowPlayerRotation) {
-			anim.SetFloat ("Blend", Speed, StopAnimTime, Time.deltaTime);
+		}
+		else if (Speed < allowPlayerRotation)
+		{
+			anim.SetFloat (_Blend, Speed, StopAnimTime, Time.deltaTime);
 		}
 	}
 }
