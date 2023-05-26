@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using SUPERCharacter;
 using UnityEngine;
 
 public class DroneAI : MonoBehaviour
@@ -10,24 +9,24 @@ public class DroneAI : MonoBehaviour
 
     private Rigidbody rb;
 
-    
+
     void Start()
     {
-        rb      = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         players = FindObjectsOfType<Player>().ToList().ConvertAll(x => x.gameObject);
     }
 
 
     private string lastPlayersName;
-    
+
     void Update()
     {
         if (players.Count == 2)
         {
             var orderedPlayers = players.OrderBy(a => Vector3.Distance(a.gameObject.transform.position, transform.position)).ToList();
-            var closestPlayer  = orderedPlayers[0];
-            var playerDelta    = closestPlayer.transform.position - transform.position;
-            var dir            = playerDelta.normalized;
+            var closestPlayer = orderedPlayers[0];
+            var playerDelta = closestPlayer.transform.position - transform.position;
+            var dir = playerDelta.normalized;
 
             rb.velocity = dir;
 
