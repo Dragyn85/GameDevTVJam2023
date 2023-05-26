@@ -11,8 +11,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] float volumeChangeSpeed;
 
+    public Action<float> volumeChanged;
+
     float volumePct;
-    Dictionary<string, MixerParameter> audioMixerDict;
+    Dictionary<string, MixerParameter> audioMixerDict = new Dictionary<string, MixerParameter>();
     private void Awake()
     {
         if (Instance == null)
@@ -28,9 +30,11 @@ public class AudioManager : MonoBehaviour
     {
         if (!audioMixerDict.ContainsKey(parameter))
         {
-            audioMixerDict.Add(parameter, new MixerParameter(audioMixer,parameter));
+            audioMixerDict.Add(parameter, new MixerParameter(audioMixer, parameter));
         }
         audioMixerDict[parameter].IncreaseVolume();
+         audioMixer.GetFloat("MusicVolume",out volumePct);
+        volumeChanged?.Invoke(volumePct);
     }
     public void decrVolume(string parameter)
     {
@@ -39,6 +43,8 @@ public class AudioManager : MonoBehaviour
             audioMixerDict.Add(parameter, new MixerParameter(audioMixer, parameter));
         }
         audioMixerDict[parameter].DecreaseVolume();
+        audioMixer.GetFloat("MusicVolume", out volumePct);
+        volumeChanged?.Invoke(volumePct);
     }
 
 
@@ -49,7 +55,7 @@ public class MixerParameter
     AudioMixer audioMixer;
     string parameter;
 
-    
+
     public event Action<float> ParameterChanged;
     public MixerParameter(AudioMixer mixer, string parameter)
     {
@@ -61,21 +67,21 @@ public class MixerParameter
     {
         audioMixer.GetFloat(parameter, out float currentMixerValue);
         currentMixerValue += 0.1f;
-        currentMixerValue = Mathf.Clamp01(currentMixerValue);
-        float newMixerValue = GetMixerValue(currentMixerValue);
+        //currentMixerValue = Mathf.Clamp01(currentMixerValue);
+        //float newMixerValue = GetMixerValue(currentMixerValue);
 
-        audioMixer.SetFloat(parameter, newMixerValue);
-        ParameterChanged?.Invoke(newMixerValue);
+        audioMixer.SetFloat(parameter, currentMixerValue);
+        ParameterChanged?.Invoke(currentMixerValue);
     }
     public void DecreaseVolume()
     {
         audioMixer.GetFloat(parameter, out float currentMixerValue);
         currentMixerValue -= 0.1f;
-        currentMixerValue = Mathf.Clamp01(currentMixerValue);
-        float newMixerValue = GetMixerValue(currentMixerValue);
+        //currentMixerValue = Mathf.Clamp01(currentMixerValue);
+        //float newMixerValue = GetMixerValue(currentMixerValue);
 
-        audioMixer.SetFloat(parameter, newMixerValue);
-        ParameterChanged?.Invoke(newMixerValue);
+        audioMixer.SetFloat(parameter, currentMixerValue);
+        ParameterChanged?.Invoke(currentMixerValue);
     }
     private float GetMixerValue(float value)
     {
