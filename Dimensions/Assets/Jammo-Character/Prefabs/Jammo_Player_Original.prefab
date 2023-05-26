@@ -1863,7 +1863,7 @@ GameObject:
   - component: {fileID: 4757836856755875625}
   - component: {fileID: 4757836856755875626}
   m_Layer: 0
-  m_Name: Jammo_Player
+  m_Name: Jammo_Player_Original
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

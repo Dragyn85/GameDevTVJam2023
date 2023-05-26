@@ -1,9 +1,12 @@
 using UnityEngine;
 
-//This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
-//With a blend tree to control the inputmagnitude and allow blending between animations.
+/// <summary>
+/// This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ" <br />
+/// With a blend tree to control the inputmagnitude and allow blending between animations. <br />
+/// </summary>
 [RequireComponent(typeof(CharacterController))]
-public class MovementInput : MonoBehaviour {
+public class MovementInput : MonoBehaviour
+{
 
     public float Velocity;
     [Space]
@@ -59,7 +62,7 @@ public class MovementInput : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		InputMagnitude ();
+		InputMagnitude();
 
         isGrounded = controller.isGrounded;
         if (isGrounded)
@@ -73,24 +76,13 @@ public class MovementInput : MonoBehaviour {
         _moveVector = new Vector3(0, verticalVel * .2f * Time.deltaTime, 0);
         controller.Move(_moveVector);
 
-
-    }
+	}// End Update
 
     void PlayerMoveAndRotation()
     {
-		InputX = Input.GetAxis ("Horizontal");
-		InputZ = Input.GetAxis ("Vertical");
-		
-		// Calculate the real Horizontal Direction:
-		//
-		if (_invertHorizontalDirectionMovement)
-		{
-			InputX *= -1.0f;
-		}
-		// else
-		// {
-		// 	
-		// }//End if (_invertHorizontalDirectionMovement)
+	    // Get input from Keyboard
+	    //
+		GetInputXZAndSetHorizontalDirectionOfMovement();
 
 		// Original code:   var camera = Camera.main;
 		var transform1 = cam.transform;
@@ -114,6 +106,23 @@ public class MovementInput : MonoBehaviour {
 		}
 	}
 
+    private void GetInputXZAndSetHorizontalDirectionOfMovement()
+    {
+	    InputX = Input.GetAxis("Horizontal");
+	    InputZ = Input.GetAxis("Vertical");
+
+	    // Calculate the real Horizontal Direction:
+	    //
+	    if (_invertHorizontalDirectionMovement)
+	    {
+		    InputX *= -1.0f;
+	    }
+	    // else
+	    // {
+	    // 	
+	    // }//End if (_invertHorizontalDirectionMovement)
+    }
+
     public void LookAt(Vector3 pos)
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(pos), desiredRotationSpeed);
@@ -134,29 +143,19 @@ public class MovementInput : MonoBehaviour {
 
 	void InputMagnitude()
 	{
-		//Calculate Input Vectors
-		InputX = Input.GetAxis ("Horizontal");
-		InputZ = Input.GetAxis ("Vertical");
-		
-		// Calculate the real Horizontal Direction:
+		// Get input from Keyboard
 		//
-		if (_invertHorizontalDirectionMovement)
-		{
-			InputX *= -1.0f;
-		}
-		// else
-		// {
-		// 	
-		// }//End if (_invertHorizontalDirectionMovement)
+		GetInputXZAndSetHorizontalDirectionOfMovement();
 
 		//anim.SetFloat ("InputZ", InputZ, VerticalAnimTime, Time.deltaTime * 2f);
 		//anim.SetFloat ("InputX", InputX, HorizontalAnimSmoothTime, Time.deltaTime * 2f);
 
-		//Calculate the Input Magnitude
+		// Calculate the Input Magnitude
+		//
 		Speed = new Vector2(InputX, InputZ).sqrMagnitude;
 
-        //Physically move player
-
+        // Physically move player
+		//
 		if (Speed > allowPlayerRotation)
 		{
 			anim.SetFloat (_Blend, Speed, StartAnimTime, Time.deltaTime);
