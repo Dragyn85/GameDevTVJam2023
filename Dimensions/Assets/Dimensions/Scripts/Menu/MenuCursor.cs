@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -77,6 +76,10 @@ public class MenuCursor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && selectedItem != null)
         {
             selectedItem.OnClick();
+        }
+        if(Input.GetKey(KeyCode.Space) && selectedItem != null)
+        {
+            selectedItem.OnHold();
         }
     }
 }

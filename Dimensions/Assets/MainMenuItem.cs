@@ -24,6 +24,11 @@ public class MainMenuItem : MonoBehaviour, IMenuItem
     {
         onClicked.Invoke();
     }
+
+    public void OnHold()
+    {
+        onStay.Invoke();
+    }
     
 
     private void OnTriggerEnter(Collider other)
@@ -38,16 +43,7 @@ public class MainMenuItem : MonoBehaviour, IMenuItem
         }
 
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (cursor != null)
-        {
-            foreach(var text in texts)
-            {
-                onStay?.Invoke();
-            }
-        }
-    }
+    
 
     private void OnTriggerExit(Collider other)
     {
@@ -67,4 +63,5 @@ public class MainMenuItem : MonoBehaviour, IMenuItem
 public interface IMenuItem
 {
     void OnClick();
+    void OnHold();
 }

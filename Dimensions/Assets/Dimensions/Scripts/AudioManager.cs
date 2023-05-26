@@ -11,7 +11,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] float volumeChangeSpeed;
 
-    public Action<float> volumeChanged;
+    public Action<float> onMusicVolumeChanged;
+    public Action<float> onSFXVolumeChanged;
 
     float volumePct;
     Dictionary<string, MixerParameter> audioMixerDict = new Dictionary<string, MixerParameter>();
@@ -20,35 +21,105 @@ public class AudioManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
     }
-    public void incrVolume(string parameter)
+
+    public void incrMusicVolume()
     {
+        string parameter = "MusicVolume";
         if (!audioMixerDict.ContainsKey(parameter))
         {
             audioMixerDict.Add(parameter, new MixerParameter(audioMixer, parameter));
         }
-        audioMixerDict[parameter].IncreaseVolume();
-         audioMixer.GetFloat("MusicVolume",out volumePct);
-        volumeChanged?.Invoke(volumePct);
+        audioMixer.GetFloat(parameter, out volumePct);
+        if (volumePct + 80 < 100)
+        {
+            audioMixerDict[parameter].IncreaseVolume();
+            audioMixer.GetFloat(parameter, out volumePct);
+            volumePct += 80;
+            onMusicVolumeChanged?.Invoke(volumePct);
+        }
+        else { 
+            audioMixer.SetFloat(parameter, 20);
+        }
     }
-    public void decrVolume(string parameter)
+
+    public void incrSFXVolume()
     {
+        string parameter = "SFXVolume";
         if (!audioMixerDict.ContainsKey(parameter))
         {
             audioMixerDict.Add(parameter, new MixerParameter(audioMixer, parameter));
         }
-        audioMixerDict[parameter].DecreaseVolume();
+        audioMixer.GetFloat(parameter, out volumePct);
+        if (volumePct + 80 < 100)
+        {
+            audioMixerDict[parameter].IncreaseVolume();
+            audioMixer.GetFloat(parameter, out volumePct);
+            volumePct += 80;
+            onSFXVolumeChanged?.Invoke(volumePct);
+        }
+        else
+        {
+            audioMixer.SetFloat(parameter, 20);
+        }
+    }
+
+    public void decrMusicVolume()
+    {
+        string parameter = "MusicVolume";
+        if (!audioMixerDict.ContainsKey(parameter))
+        {
+            audioMixerDict.Add(parameter, new MixerParameter(audioMixer, parameter));
+        }
+        audioMixer.GetFloat(parameter, out volumePct);
+        if (volumePct + 80 > 0)
+        {
+
+            audioMixerDict[parameter].DecreaseVolume();
+            audioMixer.GetFloat(parameter, out volumePct);
+            volumePct += 80;
+            onMusicVolumeChanged?.Invoke(volumePct);
+        }
+        else
+        {
+            audioMixer.SetFloat(parameter, -80);
+        }
+    }
+
+    public void decrSFXVolume()
+    {
+        string parameter = "SFXVolume";
+        if (!audioMixerDict.ContainsKey(parameter))
+        {
+            audioMixerDict.Add(parameter, new MixerParameter(audioMixer, parameter));
+        }
+        audioMixer.GetFloat(parameter, out volumePct);
+        if (volumePct + 80 > 0)
+        {
+
+            audioMixerDict[parameter].DecreaseVolume();
+            audioMixer.GetFloat(parameter, out volumePct);
+            volumePct += 80;
+            onSFXVolumeChanged?.Invoke(volumePct);
+        }
+        else
+        {
+            audioMixer.SetFloat(parameter, -80);
+        }
+    }
+
+    internal float GetVolume()
+    {
         audioMixer.GetFloat("MusicVolume", out volumePct);
-        volumeChanged?.Invoke(volumePct);
+        volumePct += 80;
+        return volumePct;
     }
-
-
-
 }
 public class MixerParameter
 {
@@ -66,7 +137,7 @@ public class MixerParameter
     public void IncreaseVolume()
     {
         audioMixer.GetFloat(parameter, out float currentMixerValue);
-        currentMixerValue += 0.1f;
+        currentMixerValue += 0.2f;
         //currentMixerValue = Mathf.Clamp01(currentMixerValue);
         //float newMixerValue = GetMixerValue(currentMixerValue);
 
@@ -76,15 +147,12 @@ public class MixerParameter
     public void DecreaseVolume()
     {
         audioMixer.GetFloat(parameter, out float currentMixerValue);
-        currentMixerValue -= 0.1f;
+        currentMixerValue -= 0.2f;
         //currentMixerValue = Mathf.Clamp01(currentMixerValue);
         //float newMixerValue = GetMixerValue(currentMixerValue);
 
         audioMixer.SetFloat(parameter, currentMixerValue);
         ParameterChanged?.Invoke(currentMixerValue);
     }
-    private float GetMixerValue(float value)
-    {
-        return Mathf.Log10(value) * 30;
-    }
+
 }
