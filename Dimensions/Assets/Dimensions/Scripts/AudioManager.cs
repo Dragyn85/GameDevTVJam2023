@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
         }
         audioMixerDict[parameter].IncreaseVolume();
          audioMixer.GetFloat("MusicVolume",out volumePct);
+        volumePct += 80;
         volumeChanged?.Invoke(volumePct);
     }
     public void decrVolume(string parameter)
@@ -44,11 +45,21 @@ public class AudioManager : MonoBehaviour
         }
         audioMixerDict[parameter].DecreaseVolume();
         audioMixer.GetFloat("MusicVolume", out volumePct);
+        volumePct += 80;
         volumeChanged?.Invoke(volumePct);
     }
 
+    private float GetMixerValue(float value)
+    {
+        return Mathf.Log10(value) * 30;
+    }
 
-
+    internal float GetVolume()
+    {
+        audioMixer.GetFloat("MusicVolume", out volumePct);
+        volumePct += 80;
+        return volumePct;
+    }
 }
 public class MixerParameter
 {
@@ -83,8 +94,5 @@ public class MixerParameter
         audioMixer.SetFloat(parameter, currentMixerValue);
         ParameterChanged?.Invoke(currentMixerValue);
     }
-    private float GetMixerValue(float value)
-    {
-        return Mathf.Log10(value) * 30;
-    }
+    
 }

@@ -8,11 +8,12 @@ public class VolumeDisplay : MonoBehaviour
     {
         musicVolume = GetComponent<TMP_Text>();
         AudioManager.Instance.volumeChanged += UpdateVolume;
+        UpdateVolume(AudioManager.Instance.GetVolume());
     }
 
     private void UpdateVolume(float volume)
     {
-        musicVolume.SetText(volume.ToString());
+        musicVolume.SetText(volume.ToString("0")+"%");
     }
 
 }
