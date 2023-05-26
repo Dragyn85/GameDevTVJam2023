@@ -130,7 +130,7 @@
                 "m_Node": {
                     "m_Id": "28a00341d5324ac1abde200cc015b1f0"
                 },
-                "m_SlotId": 4
+                "m_SlotId": 1
             },
             "m_InputSlot": {
                 "m_Node": {
@@ -637,7 +637,7 @@
     },
     "m_Name": "Split",
     "m_DrawState": {
-        "m_Expanded": false,
+        "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
             "x": -212.50001525878907,
