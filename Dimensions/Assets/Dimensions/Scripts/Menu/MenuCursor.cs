@@ -10,6 +10,8 @@ public class MenuCursor : MonoBehaviour
     [SerializeField] float cursorSpeed = 0.5f;
     [SerializeField] Transform leftCursorTransform;
     [SerializeField] Transform rightCursorTransform;
+    [SerializeField] Transform maxBound;
+    [SerializeField] Transform minBound;
 
     IMenuItem selectedItem;
 
@@ -29,10 +31,22 @@ public class MenuCursor : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Vector2 MirroredInput = new Vector2(-Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        leftCursorTransform.position += (Vector3) MirroredInput * cursorSpeed * Time.deltaTime;
-        rightCursorTransform.position += (Vector3) input * cursorSpeed * Time.deltaTime;
+        Vector3 lastLeftPos = leftCursorTransform.position;
+        Vector3 lastRightPos = rightCursorTransform.position;
 
-        if(Input.GetKeyDown(KeyCode.Space) && selectedItem != null)
+        leftCursorTransform.position += (Vector3)MirroredInput * cursorSpeed * Time.deltaTime;
+        rightCursorTransform.position += (Vector3)input * cursorSpeed * Time.deltaTime;
+
+        if (rightCursorTransform.position.x > maxBound.position.x ||
+            rightCursorTransform.position.y > maxBound.position.y ||
+            rightCursorTransform.position.x < minBound.position.x ||
+            rightCursorTransform.position.y < minBound.position.y)
+        {
+            rightCursorTransform.position = lastRightPos;
+            leftCursorTransform.position = lastLeftPos;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && selectedItem != null)
         {
             selectedItem.OnClick();
         }
