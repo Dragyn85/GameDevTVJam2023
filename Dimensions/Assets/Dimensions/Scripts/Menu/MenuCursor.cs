@@ -13,11 +13,23 @@ public class MenuCursor : MonoBehaviour
     [SerializeField] Transform maxBound;
     [SerializeField] Transform minBound;
 
-    IMenuItem selectedItem;
 
+    Animator leftAnimator;
+    Animator rightAnimator;
+    int blendHash = Animator.StringToHash("Blend");
+
+    IMenuItem selectedItem;
+    private void Awake()
+    {
+        leftAnimator = leftCursorTransform.GetComponentInChildren<Animator>();
+        rightAnimator = rightCursorTransform.GetComponentInChildren<Animator>();
+        leftAnimator.SetTrigger("Normal");
+        rightAnimator.SetTrigger("Normal");
+    }
     internal void AddIMenuItem(MainMenuItem mainMenuItem)
     {
         selectedItem = mainMenuItem;
+        
     }
 
     internal void RemoveIMenuItem()
@@ -25,11 +37,21 @@ public class MenuCursor : MonoBehaviour
         selectedItem = null;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Vector2 MirroredInput = new Vector2(-Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if(input.magnitude > 0.1) 
+        {
+            leftAnimator.SetFloat(blendHash, 0.3f);
+            rightAnimator.SetFloat(blendHash, 0.3f);
+        }
+        else
+        {
+            leftAnimator.SetFloat(blendHash, 0f);
+            rightAnimator.SetFloat(blendHash, 0f);
+        }
 
         Vector3 lastLeftPos = leftCursorTransform.position;
         Vector3 lastRightPos = rightCursorTransform.position;
@@ -44,6 +66,8 @@ public class MenuCursor : MonoBehaviour
         {
             rightCursorTransform.position = lastRightPos;
             leftCursorTransform.position = lastLeftPos;
+            rightAnimator.SetFloat(blendHash, 0f);
+            leftAnimator.SetFloat(blendHash, 0f);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && selectedItem != null)
