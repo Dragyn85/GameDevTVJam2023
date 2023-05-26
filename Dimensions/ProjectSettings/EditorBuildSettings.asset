@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Dimensions/Scenes/Jonas - Main Menu.unity
     guid: 5751ffe93d486884d879467b2653f389
   - enabled: 1
-    path: Assets/Dimensions/Scenes/Alejandro - Level 1 Prototype.unity
+    path: Assets/Levels/Old Scenes Backup/Alejandro - Level 1 Prototype.unity
     guid: 3e81a1351faa434e195a52f17342bcd3
   m_configObjects: {}
