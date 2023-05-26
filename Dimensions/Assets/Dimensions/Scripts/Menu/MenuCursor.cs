@@ -77,5 +77,9 @@ public class MenuCursor : MonoBehaviour
         {
             selectedItem.OnClick();
         }
+        if(Input.GetKey(KeyCode.Space) && selectedItem != null)
+        {
+            selectedItem.OnHold();
+        }
     }
 }

@@ -26,4 +26,9 @@ public class MainMenu : MonoBehaviour
         loadLevelIndex = index;
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }
