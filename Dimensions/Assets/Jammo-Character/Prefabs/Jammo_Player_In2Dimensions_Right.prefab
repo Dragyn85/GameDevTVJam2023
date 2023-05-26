@@ -4465,6 +4465,7 @@ GameObject:
   - component: {fileID: 1248658234645919225}
   - component: {fileID: 1248658234645919226}
   - component: {fileID: 6004172852296835865}
+  - component: {fileID: 7964756225305868170}
   m_Layer: 0
   m_Name: Jammo_Player_In2Dimensions_Right
   m_TagString: Untagged
@@ -4511,7 +4512,7 @@ Transform:
   - {fileID: 1603341930278069205}
   - {fileID: 8668835904772149397}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4225668389631880261
 Animator:
@@ -4620,6 +4621,18 @@ MonoBehaviour:
   minScale: 0.33
   maxScale: 3
   startScale: 1
+--- !u!114 &7964756225305868170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7094802300737729324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d33931dc4f0ea4195a282021bb07eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7153170095618543221
 GameObject:
   m_ObjectHideFlags: 0
