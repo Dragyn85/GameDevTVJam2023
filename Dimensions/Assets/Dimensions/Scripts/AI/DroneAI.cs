@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DroneAI : MonoBehaviour
 {
-    [SerializeField] internal float rotSpeed;
+    [FormerlySerializedAs("movepeed")] [SerializeField]
+    internal float moveSpeed = 2;
+    [FormerlySerializedAs("rotSpeed")] [SerializeField]
+    internal float rotateSpeed = 3;
 
     [SerializeField] internal LayerMask _layerMask;
 
@@ -62,10 +66,10 @@ public class DroneAI : MonoBehaviour
         var dir         = playerDelta.normalized;
         dir.y = 0;
 
-        rb.velocity = dir; //
+        rb.velocity = dir * moveSpeed;
 
 
-        var angRot = Vector3.Cross(dir, transform.forward) * rotSpeed;
+        var angRot = Vector3.Cross(dir, transform.forward) * rotateSpeed;
         rb.angularVelocity = angRot;
 
         var playersName = playerGO.gameObject.name;
