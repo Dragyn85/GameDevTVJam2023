@@ -11,6 +11,7 @@ public class MainMenuItem : MonoBehaviour, IMenuItem
     [SerializeField] TMP_Text[] texts;
 
     public UnityEvent onClicked;
+    public UnityEvent onStay;
 
     Color initialTextColor;
     MenuCursor cursor;
@@ -23,6 +24,7 @@ public class MainMenuItem : MonoBehaviour, IMenuItem
     {
         onClicked.Invoke();
     }
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,6 +37,16 @@ public class MainMenuItem : MonoBehaviour, IMenuItem
             cursor.AddIMenuItem(this);
         }
 
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (cursor != null)
+        {
+            foreach(var text in texts)
+            {
+                onStay?.Invoke();
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)

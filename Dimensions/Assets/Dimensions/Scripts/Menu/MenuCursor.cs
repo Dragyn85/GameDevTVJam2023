@@ -46,6 +46,8 @@ public class MenuCursor : MonoBehaviour
         {
             leftAnimator.SetFloat(blendHash, 0.3f);
             rightAnimator.SetFloat(blendHash, 0.3f);
+            rightCursorTransform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg+90);
+            leftCursorTransform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(MirroredInput.y, MirroredInput.x) * Mathf.Rad2Deg+90);
         }
         else
         {
@@ -58,6 +60,8 @@ public class MenuCursor : MonoBehaviour
 
         leftCursorTransform.position += (Vector3)MirroredInput * cursorSpeed * Time.deltaTime;
         rightCursorTransform.position += (Vector3)input * cursorSpeed * Time.deltaTime;
+
+        
 
         if (rightCursorTransform.position.x > maxBound.position.x ||
             rightCursorTransform.position.y > maxBound.position.y ||
