@@ -21,8 +21,20 @@ public class ChangeMaterial : MonoBehaviour
         //
         // Get the Default initial material:
         //
-        _initialDefaultMaterial = _meshRenderer.sharedMaterial;
-    }
+        if (_meshRenderer == null)
+        {
+            // Detach the script from the GameObject
+            Destroy(GetComponent<ChangeMaterial>());
+        }
+        else
+        {
+            // Everything is fine, so do your work:
+            //
+            _initialDefaultMaterial = _meshRenderer.sharedMaterial;
+
+        }//End else
+
+    }// End Awake
     
     
     // Its was just to test the functionality. DO NOT USE IT
