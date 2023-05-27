@@ -2255,9 +2255,10 @@ GameObject:
   - component: {fileID: 6535924620623803692}
   - component: {fileID: 6535924620623803695}
   - component: {fileID: 1779906714123631617}
+  - component: {fileID: 5981426633340930059}
   m_Layer: 0
   m_Name: Jammo_Player_In2Dimensions_Left
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2410,6 +2411,19 @@ MonoBehaviour:
   minScale: 0.33
   maxScale: 3
   startScale: 1
+--- !u!114 &5981426633340930059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2996487796932604921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627819633a115f2a3a65aa95aefe86d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myDefaultVar: 0
 --- !u!1 &3002809143865952156
 GameObject:
   m_ObjectHideFlags: 0

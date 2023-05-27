@@ -2233,11 +2233,16 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 539235307807133729, guid: 5fe7494262182a05c959e6a9843a7154,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 539235308048843467, guid: 5fe7494262182a05c959e6a9843a7154,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f6cc7acf8207dd852ae8eef3d03f52ed, type: 2}
+      objectReference: {fileID: 2100000, guid: 5bd866b2df3985b738a89d2629ce36b1, type: 2}
     - target: {fileID: 539235308456336830, guid: 5fe7494262182a05c959e6a9843a7154,
         type: 3}
       propertyPath: m_Name
@@ -2298,6 +2303,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9214513668316743176, guid: 5fe7494262182a05c959e6a9843a7154,
+        type: 3}
+      propertyPath: newMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: f6cc7acf8207dd852ae8eef3d03f52ed, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fe7494262182a05c959e6a9843a7154, type: 3}
