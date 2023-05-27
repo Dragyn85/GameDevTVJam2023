@@ -7,16 +7,22 @@ using UnityEngine.TextCore.Text;
 
 public class MainMenuItem : MonoBehaviour, IMenuItem
 {
-    [SerializeField] Color selectedColor;
+    [SerializeField] Color highlightColorRight;
     [SerializeField] TMP_Text[] texts;
 
     public UnityEvent onClicked;
+    public UnityEvent onStay;
 
-    Color initialTextColor;
+    Color[] initialTextColor = new Color[2];
+
     MenuCursor cursor;
     private void Start()
     {
-        initialTextColor = texts[0].color;
+        for (int i = 0; i < texts.Length; i++)
+        {
+            initialTextColor[i] = texts[i].color;
+        }
+
         cursor = FindObjectOfType<MenuCursor>();
     }
     public void OnClick()
@@ -24,26 +30,35 @@ public class MainMenuItem : MonoBehaviour, IMenuItem
         onClicked.Invoke();
     }
 
+    public void OnHold()
+    {
+        onStay.Invoke();
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (cursor != null)
         {
-            foreach (var text in texts)
+            for (int i = 0; i < texts.Length; i++)
             {
-                text.color = selectedColor;
+                TMP_Text text = texts[i];
+                text.color = highlightColorRight;
             }
             cursor.AddIMenuItem(this);
         }
 
     }
 
+
     private void OnTriggerExit(Collider other)
     {
         if (cursor != null)
         {
-            foreach (var text in texts)
+            for (int i = 0; i < texts.Length; i++)
             {
-                text.color = initialTextColor;
+                TMP_Text text = texts[i];
+                text.color = initialTextColor[i];
             }
             cursor.RemoveIMenuItem();
         }
@@ -55,4 +70,5 @@ public class MainMenuItem : MonoBehaviour, IMenuItem
 public interface IMenuItem
 {
     void OnClick();
+    void OnHold();
 }

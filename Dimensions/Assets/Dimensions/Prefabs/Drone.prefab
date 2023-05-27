@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7569067445660372882}
   - component: {fileID: 2434616778005149597}
   - component: {fileID: 6698284859374757121}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708461397956636493}
-  m_LocalRotation: {x: -0.0063515175, y: 0.49122277, z: 0.0010561359, w: 0.8710102}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0021991036, w: 0.9999976}
   m_LocalPosition: {x: 4.645, y: -2.65, z: 29.514}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 3525127960962168185}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -0.693, y: 58.845, z: -0.252}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.252}
 --- !u!114 &2434616778005149597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,6 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e152d94f44db0574d94474d176dbdc27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 2
+  rotateSpeed: 3
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!54 &6698284859374757121
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -74,7 +79,7 @@ GameObject:
   - component: {fileID: 523577135046949596}
   - component: {fileID: 2351136191097441814}
   - component: {fileID: 4312377088832633540}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
