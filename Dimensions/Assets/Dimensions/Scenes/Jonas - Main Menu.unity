@@ -181,9 +181,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Move: WASD
-
-    Interacti: Space Key'
+  m_text: "Welcome to dimensions! \nHelp the scientists to getting these quantum
+    robots through the portal to a unified dimension. \n\nHow to play:\nMove:      
+    WASD/Arrows\nAct:           Space Key\nQ and E:   Scale player\n\nMade by:\nAlejandro,
+    Github: https://github.com/almartson\n\nDavid, Github: https://github.com/DavidJH2\n\nJonas,
+    Github: https://github.com/Dragyn85\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -246,7 +248,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -161.34122, z: -205.51794, w: 0}
+  m_margin: {x: 0, y: -744.2086, z: -294.3454, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -429,7 +431,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.6, y: 3.3}
+  m_AnchoredPosition: {x: -5.85, y: 6.56}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1203517876
@@ -673,7 +675,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879682016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.13, y: -3.56, z: 3.0706625}
+  m_LocalPosition: {x: -15.69, y: -4.02, z: 3.0706625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -704,7 +706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890450422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.37, y: 5.54, z: 3.0706625}
+  m_LocalPosition: {x: 7.71, y: 9.04, z: 3.0706625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1159,6 +1161,76 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294906368
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170234145316, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: orthographic size
+      value: 8.2265625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170234145317, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.109999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170234145317, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170234145317, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 1e-45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170234145317, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170234145317, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170370335908, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.9899993
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170370335908, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170370335908, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 1e-45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170370335908, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170370335908, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170471277185, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.109999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170471277185, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149527170471277185, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4149527170471277190, guid: 5f9411b4a62fb3045b074f8671bdd208,
         type: 3}
