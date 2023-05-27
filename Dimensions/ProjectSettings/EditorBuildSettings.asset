@@ -5,16 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Dimensions/Scenes/CharacterTestScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Dimensions/Scenes/Jonas - Main Menu.unity
     guid: 5751ffe93d486884d879467b2653f389
-  - enabled: 0
-    path: Assets/Levels/Old Scenes Backup/Alejandro - Level 1 Prototype.unity
-    guid: 3e81a1351faa434e195a52f17342bcd3
   - enabled: 1
-    path: Assets/Dimensions/Scenes/Alejandro - CharacterControllerFromZeroTestItOut.unity
-    guid: 7b4aa1d78e1b8949eb56c62335c9b67c
+    path: Assets/Dimensions/Scenes/Alejandro - Level1+Switches+CharacterControllerFromZeroTestItOut.unity
+    guid: 1ee15967d5568c395a33d897ba3a7060
   m_configObjects: {}
