@@ -2,6 +2,7 @@
 ...on Path:   /PathToUnityHub/Unity/Hub/Editor/UNITY_VERSION_FOR_EXAMPLE__2020.3.36f1/Editor/Data/Resources/ScriptTemplates/81-C# Script-NewBehaviourScript.cs
 */
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Logic to Open a Closed Door, when colliding with a Switch.
@@ -50,11 +51,26 @@ public class DoorSwitchBehavior : MonoBehaviour
     
     // Random Pitch values:
     //
+    [Header("1- 'Good' Random Pitch values:  For any TRUE Switch")]
+    
     [Tooltip("Minimum value for random generation of Pitch.")]
-    public float minPitch = 0.8f;
+    public float minPitchTrueSwitch = 0.8f;
     
     [Tooltip("Maximum value for random generation of Pitch.")]
-    public float maxPitch = 1.2f;
+    public float maxPitchTrueSwitch = 1.2f;
+
+    
+    [Header("2- 'Wrong' Random Pitch values:  For any TRAP, FALSE or 'WRONG' Switch")]
+    
+    [Tooltip("Minimum value for random generation of Pitch.")]
+    public float minWrongPitch = 0.07f;
+    
+    [Tooltip("Maximum value for random generation of Pitch.")]
+    public float maxWrongPitch = 0.5f;
+
+    [Tooltip("Maximum value for random generation of Pitch.")]
+    [SerializeField]
+    private float _fractionOfDurationForWrongSound = 2.0f;
 
     #endregion Switch Sound
     
@@ -89,8 +105,12 @@ public class DoorSwitchBehavior : MonoBehaviour
     /// Cache of this GameObject's Material...
     /// </summary>
     private Material _material;
-
-
+    
+    /// <summary>
+    /// Cache of this GameObject's Material Property:  "_BaseColor"...
+    /// </summary>
+    private static readonly int _BaseColor = Shader.PropertyToID("_BaseColor");
+    
     #endregion Optimization
 
     #endregion Attributes
@@ -127,7 +147,11 @@ public class DoorSwitchBehavior : MonoBehaviour
 	    
 	    // FOR Door Animation: 2- Get the Animator component from the door GameObject
 	    //
-	    _doorAnimator = _door.GetComponent<Animator>();
+	    if (_door != null)
+	    {
+		    _doorAnimator = _door.GetComponent<Animator>();
+
+	    }//End if
 	    
 	    #endregion FOR:  1- Animations of the Switch
 
@@ -180,23 +204,12 @@ public class DoorSwitchBehavior : MonoBehaviour
 		if (other.CompareTag("Player"))
 		{
 
-			// Todo Ale
 			// Logic when pressing the Switch
-			//
-			Debug.LogWarning($"Todo Ale:  Logic when pressing the Switch.");
-			
-			
 			// Logic + Animations + Sound... when pressing the Switch:
 			//
 			ActivateDoorSwitch();
 			
-			
-			// if (explosionPrefab)
-			// {
-			// 	// Instantiate an explosion effect at the gameObjects position and rotation
-			// 	//Instantiate (explosionPrefab, transform.position, transform.rotation);
-			// }
-	
+
 			// if game manager exists, make adjustments based on target properties
 			// if (GameManager.gm)
 			// {
@@ -204,7 +217,6 @@ public class DoorSwitchBehavior : MonoBehaviour
 			// }
 			//
 			// Todo Ale:  Add and Program the GameManager.cs  here
-			// door... something
 			//
 			Debug.LogWarning($"Todo:  Add and Program the GameManager.cs  here.\n\n * If game manager exists, make adjustments based on target properties.");
 
@@ -226,21 +238,7 @@ public class DoorSwitchBehavior : MonoBehaviour
 	    //  1.1- Turn off this GameObject's Emission of the material
 	    //  Access the Renderer:  The Renderer provides access to the material used by the GameObject.
 	    //
-	    if ( _material != null )
-	    {
-		    // Turn off emission
-		    _material.DisableKeyword("_EMISSION");
-            
-		    // Update the material on the GameObject
-		    //renderer.material = material;
-		    
-		    // Change Albedo color to black
-		    _material.SetColor("_BaseColor", Color.black);
-            
-		    // Update the material on the GameObject
-		    //renderer.material = material;
-
-	    }//End if ( _thisGameObject.TryGetComponent(
+	    DeactivateMaterialEmissionOfSwitch();
 	    
 	    //  1.2- Turn off this CHILD's GameObject's Point Light, if there is one...
 	    //
@@ -258,6 +256,7 @@ public class DoorSwitchBehavior : MonoBehaviour
 		    // Play the door moving animation
 		    //
 		    _doorAnimator.SetTrigger(_OpenDoor);
+		    
 	    }
 	    //  2.2- When it touches another INVISIBLE TRIGGER, or (plan b: when it ends its movement in the Animation, can't be LOOPING Animation):   Stop  all this Animation
 	    
@@ -266,12 +265,13 @@ public class DoorSwitchBehavior : MonoBehaviour
 		
 	    //  3.1- Switch
 	    //
-	    // Play the switch sound
+	    // Play the  SWITCH Sound
 	    //
-	    PlayShortSoundWithRandomPitch();
+	    PlayShortSwitchSoundWithRandomPitch(_fractionOfDurationForWrongSound);
 
 	    //  3.2- Door
-	    //  See connection with another Script (the attribute / Field here is):   private DoorAnimationAndSoundsBehavior _doorAnimationAndSoundsBehavior;
+	    //  The sound is played in the Door Animation.clip, by the Unity Animator of the Door Prefab, as an Unity "Animation Event".
+	    //  See the connection from this script, to the other Script (the attribute / Field here is):   private DoorAnimationAndSoundsBehavior _doorAnimationAndSoundsBehavior;
 		
 	    // 4- Miscellaneous Logic Involved
 		
@@ -282,6 +282,36 @@ public class DoorSwitchBehavior : MonoBehaviour
 	    // NOT NECESSARY
 		
     }// End ActivateTheDoorSwitch
+
+    
+    #region LIGHT utils
+    
+    /// <summary>
+    /// Disables the CheckBox:  Emission  on the Material via Code. 
+    /// </summary>
+    private void DeactivateMaterialEmissionOfSwitch()
+    {
+	    // 1- Animations of the Switch
+
+	    //  1.1- Turn off this GameObject's Emission of the material
+	    //  Access the Renderer:  The Renderer provides access to the material used by the GameObject.
+	    //
+	    if (_material != null)
+	    {
+		    // Turn off emission
+		    _material.DisableKeyword("_EMISSION");
+
+		    // Update the material on the GameObject
+		    //renderer.material = material;
+
+		    // Change Albedo color to black
+		    _material.SetColor(_BaseColor, Color.black);
+
+		    // Update the material on the GameObject
+		    //renderer.material = material;
+
+	    } //End if
+    }// End DeactivateMaterialEmissionOfSwitch
 
 
     /// <summary>
@@ -311,15 +341,44 @@ public class DoorSwitchBehavior : MonoBehaviour
 	    }//End if (parentObject.transform.childCount > 0)
     }//End DisablePointLight
     
+    #endregion LIGHT utils
+    
+    #region SOUNDS utils
     
     /// <summary>
-    /// Play a sound with an Random Pitch, short-lived,
+    /// Play a sound with an Random Pitch, short-lived (i.e.:  a special time duration for the Sound is set here, too...). <br /> <br />
+    /// The pitch:  will be A TRUE / GOOD pitch: if the Field  _door  exists... <br /> <br />
+    /// The pitch:  will be A FALSE / 'WRONG' pitch: if the Field  _door does NOT exist. <br /> <br />
     /// </summary>
-    private void PlayShortSoundWithRandomPitch()
+    private void PlayShortSwitchSoundWithRandomPitch(float fractionOfDurationForSound)
     {
 	    // Set a random pitch for the sound
 	    //
-	    float randomPitch = Random.Range(minPitch, maxPitch);
+	    float randomPitch;
+	    
+	    // Pitch:
+	    //
+	    if ( _door != null )
+	    {
+		    // Set a ( GOOD / RIGHT / TRUE ) random pitch for the sound
+		    //
+		    randomPitch = Random.Range(minPitchTrueSwitch, maxPitchTrueSwitch);
+		    
+		    // Set the Fraction of Duration of Sound to Play
+		    //
+		    fractionOfDurationForSound = 1.0f;
+	    }
+	    else
+	    {
+		    // Set a ( WRONG / TRAP / FALSE ) random pitch for the sound
+		    //
+		    randomPitch = Random.Range(minWrongPitch, maxWrongPitch);
+
+		    // // Set the Fraction of Duration of Sound to Play
+		    // //
+		    // fractionOfDurationForWrongSound = fractionOfDurationForWrongSound; //nothing to do here...
+
+	    }//End if Pitch...
 
 	    // Configure the AudioSource settings
 	    //
@@ -328,38 +387,78 @@ public class DoorSwitchBehavior : MonoBehaviour
 
 	    // Play the sound
 	    //
-	    _audioSource1ForSwitchSound.Play();
+	    // _audioSource1ForSwitchSound.Play();
+	    //
+	    PlaySoundOnlyForCertainDuration(_audioSource1ForSwitchSound, fractionOfDurationForSound);
     }
 
     /// <summary>
-    /// To be played by an ANIMATION EVENT (see the Animation Clip for the Door Prefab)
+    /// Plays a sound that is already loaded in an 'AudioSource', for a certain time fractional 'duration' (for instance: to play a sound only b half of its duration, use fractionOfDuration = 2.0  ; so: time = (total / 2.0)  ).
     /// </summary>
-    public void PlayDoorSound()
+    /// <param name="audioSource"></param>
+    /// <param name="fractionOfDuration"></param>
+    public void PlaySoundOnlyForCertainDuration(AudioSource audioSource, float fractionOfDuration)
     {
-	    // Play the door sound with a random pitch
+	    // Validation
 	    //
-	    float randomPitch = Random.Range(minPitch, maxPitch);
+	    if (fractionOfDuration <= 0.01f)
+	    {
+		    //throw new ArgumentOutOfRangeException(nameof(duration));
+		    
+		    Debug.LogError($"Error: ArgumentOutOfRangeException(nameof(fractionOfDuration)... for the audioSource = {audioSource} passed to the function: 'PlaySoundOnlyForCertainDuration'  \n\n * Class / Script 'DoorSwitchBehavior.cs' {this.name}.\n\n Please Fix it in the Inspector.");
+		    
+		    return;
+	    }
+	    //
+	    if (audioSource == null)
+	    {
+	        Debug.LogError($"Error: NullReferenceException... for the audioSource = {audioSource} passed to the function: 'PlaySoundOnlyForCertainDuration'  \n\n * Class / Script 'DoorSwitchBehavior.cs' {this.name}.\n\n Please Fix it in the Inspector.");
+	        
+	        return;
+	    }
+
+	    // // Load the audio clip into the AudioSource component
+	    // audioSource.clip = YourAudioClip;
+
+	    // Calculate the duration to play the sound (half of the clip's length)
+	    float duration = audioSource.clip.length / fractionOfDuration;
+
+	    // Get the scheduled end time
+	    double scheduledEndTime = AudioSettings.dspTime + duration;
+
+	    // Play the sound using PlayScheduled
+	    audioSource.PlayScheduled(AudioSettings.dspTime);
+
+	    // Set the scheduled end time
+	    audioSource.SetScheduledEndTime(scheduledEndTime);
 	    
-	    _audioSource2ForDoorOpeningSound.pitch = randomPitch;
-	    _audioSource2ForDoorOpeningSound.Play();
+	    // Assign the Sound to the AudioSource:
+	    //
+	    _audioSource1ForSwitchSound = audioSource;
+
+	    // Stop the sound after the desired duration
+	    //
+	    Invoke(nameof(StopSound), duration);
+
+    }// End PlaySoundOnlyForCertainDuration
+
+
+    /// <summary>
+    /// Stops any sound.
+    /// </summary>
+    public void StopSound()
+    {
+	    //audioSource.Stop();
+	    
+	    _audioSource1ForSwitchSound.Stop();
     }
 
     /// <summary>
-    /// Stops an ANIMATION EVENT of Playing a Sound (see the Animation Clip for the Door Prefab)
+    /// Initialization of 'AudioSource's in this script,
     /// </summary>
-    public void StopDoorSound()
-    {
-	    // Stop playing the door sound
-	    //
-	    _audioSource2ForDoorOpeningSound.Stop();
-    }
-
-	/// <summary>
-	/// Initialization of 'AudioSource's in this script,
-	/// </summary>
-	/// <param name="audioClip"></param>
-	/// <param name="secondAudioSource"></param>
-	/// <returns></returns>
+    /// <param name="audioClip"></param>
+    /// <param name="secondAudioSource"></param>
+    /// <returns></returns>
     private AudioSource GetOrCreateAudioSource(AudioClip audioClip, bool secondAudioSource)
     {
 	    // List of A.S. that's already present:
@@ -405,9 +504,49 @@ public class DoorSwitchBehavior : MonoBehaviour
 	    return audioSource;
 
     }//End GetOrCreateAudioSource
+
+    #endregion SOUNDS utils
     
+    
+    #region SOUNDS for: Door Animation
+
+    /// <summary>
+    /// To be played by an ANIMATION EVENT (see the Animation Clip for the Door Prefab)
+    /// </summary>
+    public void PlayDoorSound()
+    {
+	    // Play the door sound with a random pitch
+	    //
+	    float randomPitch = Random.Range(minPitchTrueSwitch, maxPitchTrueSwitch);
+	    
+	    _audioSource2ForDoorOpeningSound.pitch = randomPitch;
+	    _audioSource2ForDoorOpeningSound.Play();
+    }
+
+    /// <summary>
+    /// Stops an ANIMATION EVENT of Playing a Sound (see the Animation Clip for the Door Prefab)
+    /// </summary>
+    public void StopDoorSound()
+    {
+	    // Stop playing the door sound
+	    //
+	    _audioSource2ForDoorOpeningSound.Stop();
+    }
+
+    /// <summary>
+    /// Return a Script "DoorAnimationAndSoundsBehavior" to control the Play and Stop() functions of the Sounds of the Door Animation.<br /> <br />
+    /// Note: It return  "null"  if the  "_door"  is null.
+    /// </summary>
+    /// <returns></returns>
     private DoorAnimationAndSoundsBehavior GetOrAddCreateDoorAnimationANdSoundsScriptInDoorGameObject()
     {
+	    // Validation  Does _door  exist?
+	    //
+	    if ( _door == null )
+	    {
+		    return null;
+	    }
+	    
 	    // Check to see if there is a reference to the Script, first:
 	    //
 	    DoorAnimationAndSoundsBehavior doorAnimationAndSoundsBehavior = _door.GetComponent<DoorAnimationAndSoundsBehavior>();
@@ -424,6 +563,8 @@ public class DoorSwitchBehavior : MonoBehaviour
 	    return doorAnimationAndSoundsBehavior;
 
     }//End GetOrAddCreateDoorAnimationANdSoundsScriptInDoorGameObject
-
-    #endregion My Custom Methods
+    
+    #endregion  SOUNDS for: Door Animation
+    
+	#endregion My Custom Methods
 }

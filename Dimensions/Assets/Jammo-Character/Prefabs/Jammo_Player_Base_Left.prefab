@@ -2257,7 +2257,7 @@ GameObject:
   - component: {fileID: 1779906714123631617}
   - component: {fileID: 5981426633340930059}
   m_Layer: 0
-  m_Name: Jammo_Player_In2Dimensions_Left
+  m_Name: Jammo_Player_Base_Left
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

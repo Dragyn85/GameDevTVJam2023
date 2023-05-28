@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9ab46fe87f31eacaa0f08bda5232ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newMaterial: {fileID: 2100000, guid: f6cc7acf8207dd852ae8eef3d03f52ed, type: 2}
+  newMaterial: {fileID: 2100000, guid: 1c01d599e1cb5fca79b70ec35d3dbd5a, type: 2}
 --- !u!95 &1612721629561492859
 Animator:
   serializedVersion: 4
@@ -145,4 +145,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5104809d67993cbf98d7555f4d9db48a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myDefaultVar: 0
+  _doorSwitchBehaviorScript: {fileID: 0}

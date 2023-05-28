@@ -115,8 +115,11 @@ MonoBehaviour:
   timeAmount: 10
   _door: {fileID: 1796859866552321636, guid: 5137a0dba60aecd138489956df8f4945, type: 3}
   switchSound: {fileID: 8300000, guid: 53882d540b644007e97b38977643f9f5, type: 3}
-  minPitch: 0.8
-  maxPitch: 1.2
+  minPitchTrueSwitch: 0.8
+  maxPitchTrueSwitch: 1.2
+  minWrongPitch: 0.15
+  maxWrongPitch: 0.33
+  _fractionOfDurationForWrongSound: 7
   doorOpeningSound: {fileID: 8300000, guid: d00e581dd595235759b55836408b91dd, type: 3}
 --- !u!1 &9019523264108678417
 GameObject:
