@@ -6,28 +6,72 @@ using UnityEngine.Serialization;
 
 public class DroneAI : MonoBehaviour
 {
-    [FormerlySerializedAs("movepeed")] [SerializeField]
-    internal float moveSpeed = 2;
-    [FormerlySerializedAs("rotSpeed")] [SerializeField]
-    internal float rotateSpeed = 3;
-
+    [SerializeField] internal float     moveSpeed   = 2;
+    [SerializeField] internal float     rotateSpeed = 3;
     [SerializeField] internal LayerMask _layerMask;
+    [SerializeField] internal float     STUN_TIME = 3;
 
     internal List<GameObject> players;
+    internal ParticleSystem   _particleSystem;
 
     private Rigidbody rb;
+    internal float stunTime = 0;
 
 
     void Start()
     {
-        rb      = GetComponent<Rigidbody>();
-        players = FindObjectsOfType<Player>().ToList().ConvertAll(x => x.gameObject);
+        rb              = GetComponent<Rigidbody>();
+        players         = FindObjectsOfType<Player>().ToList().ConvertAll(x => x.gameObject);
+        _particleSystem = FindObjectOfType<ParticleSystem>();
     }
 
 
     private string lastPlayersName;
 
     void Update()
+    {
+        UpdateDrone(Time.deltaTime);
+        DebugStunActivator();
+    }
+
+    private void DebugStunActivator()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            StunDrone();
+        }
+    }
+
+    private void StunDrone()
+    {
+        stunTime = STUN_TIME;
+        _particleSystem.Play();
+    }
+
+
+    private void UpdateDrone(float deltaTime)
+    {
+        if (stunTime > 0)
+        {
+            DoStun(deltaTime);
+        }
+        else
+        {
+            DoMovement();
+        }
+    }
+
+    private void DoStun(float deltaTime)
+    {
+        stunTime -= deltaTime;
+        if (stunTime < 0)
+        {
+            stunTime = 0;
+            _particleSystem.Stop();
+        }
+    }
+
+    private void DoMovement()
     {
         if (players.Count == 2)
         {
@@ -51,6 +95,7 @@ public class DroneAI : MonoBehaviour
             }
         }
     }
+
 
     private void StopMoving()
     {
