@@ -2,6 +2,7 @@
 ...on Path:   /PathToUnityHub/Unity/Hub/Editor/UNITY_VERSION_FOR_EXAMPLE__2020.3.36f1/Editor/Data/Resources/ScriptTemplates/81-C# Script-NewBehaviourScript.cs
 */
 using UnityEngine;
+using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -33,11 +34,15 @@ public class DoorSwitchBehavior : MonoBehaviour
     /// Animation Hash Name:  OpenDoor
     /// </summary>
     private static readonly int _OpenDoor = Animator.StringToHash("DooOpenToTheSide");
-    
-    #endregion Door Animation
+
+	#endregion Door Animation
+
+	#region SoundSetting
+	[SerializeField, Tooltip("Mixer group that will be added to the AudioSource")] AudioMixerGroup sfxMixerGroup;
+    #endregion
 
     #region Switch Sound
-    
+
     /// <summary>
     /// Audio to Play
     /// </summary>
@@ -476,6 +481,7 @@ public class DoorSwitchBehavior : MonoBehaviour
 			    // Add an A.S.
 			    //
 			    audioSource = gameObject.AddComponent<AudioSource>();
+				audioSource.outputAudioMixerGroup = sfxMixerGroup;
 		    }
 		    // else
 		    // {
@@ -488,7 +494,8 @@ public class DoorSwitchBehavior : MonoBehaviour
 		    if (audioSource == null)
 		    {
 			    audioSource = gameObject.AddComponent<AudioSource>();
-		    }
+                audioSource.outputAudioMixerGroup = sfxMixerGroup;
+            }
 
 	    }//ENd else of if (secondAudioSource)
 

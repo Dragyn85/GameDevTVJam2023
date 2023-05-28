@@ -8230,6 +8230,12 @@ PrefabInstance:
       propertyPath: _door
       value: 
       objectReference: {fileID: 4680036345766393356}
+    - target: {fileID: -5405331490529120026, guid: 27dcbb53b0834907dadb780d2c585d75,
+        type: 3}
+      propertyPath: sfxMixerGroup
+      value: 
+      objectReference: {fileID: 7063335716293820976, guid: 375d15b1c1faf74459e7c6ae1a18d241,
+        type: 2}
     - target: {fileID: 6858851189068988204, guid: 27dcbb53b0834907dadb780d2c585d75,
         type: 3}
       propertyPath: m_RootOrder

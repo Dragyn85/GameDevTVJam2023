@@ -323,11 +323,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 412552754466204310, guid: 5fe7494262182a05c959e6a9843a7154,
-        type: 3}
-      propertyPath: doorOpeningSound
-      value: 
-      objectReference: {fileID: 8300000, guid: d00e581dd595235759b55836408b91dd, type: 3}
     - target: {fileID: 539235308456336830, guid: 5fe7494262182a05c959e6a9843a7154,
         type: 3}
       propertyPath: m_Name
