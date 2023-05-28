@@ -22,7 +22,7 @@ public class DroneAI : MonoBehaviour
     {
         rb              = GetComponent<Rigidbody>();
         players         = FindObjectsOfType<Player>().ToList().ConvertAll(x => x.gameObject);
-        _particleSystem = FindObjectOfType<ParticleSystem>();
+        _particleSystem = GetComponent<ParticleSystem>();
     }
 
 
