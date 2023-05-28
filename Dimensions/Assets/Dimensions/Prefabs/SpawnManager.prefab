@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3671092721704736504
 MonoBehaviour:
@@ -44,3 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5318c8e7c2942fa47a59b8f8ac3bfe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityToSpawn: {fileID: 1708461397956636493, guid: 5bd685975a63f0542b3ac964a6f0f778,
+    type: 3}
+  numEntitiesToSpawn: 0
+  yOffset: 1
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}

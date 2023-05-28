@@ -41,13 +41,11 @@ public class DroneAI : MonoBehaviour
 
                 if (closestPlayer && PlayerVisible(closestPlayer))
                 {
-                    Debug.Log("Move Toward Player");
                     MoveTowardPlayer(closestPlayer);
                     break;
                 }
                 else
                 {
-                    Debug.Log("Stop Moving");
                     StopMoving();
                 }
             }
@@ -75,7 +73,6 @@ public class DroneAI : MonoBehaviour
         var playersName = playerGO.gameObject.name;
         if (playersName != lastPlayersName)
         {
-            Debug.Log($"Closest Player: {playersName}");
             lastPlayersName = playersName;
         }
     }
@@ -86,6 +83,7 @@ public class DroneAI : MonoBehaviour
     {
         var dronPos   = transform.position;
         var playerPos = player.transform.position;
+        playerPos.y += 1;
         var raycast   = Physics.Linecast(dronPos, playerPos, _layerMask);
 
         return !raycast;
