@@ -984,6 +984,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jammo_Player_Left
       objectReference: {fileID: 0}
+    - target: {fileID: 9099089207370701760, guid: 4b5eec8c3335d6c4f9ff9d338338c8aa,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b5eec8c3335d6c4f9ff9d338338c8aa, type: 3}
@@ -2032,6 +2037,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2169612191100110038, guid: 2ea665ea4b48c77bdbc5519d40660b44,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5101831619084508095, guid: 2ea665ea4b48c77bdbc5519d40660b44,
         type: 3}
       propertyPath: m_Name
