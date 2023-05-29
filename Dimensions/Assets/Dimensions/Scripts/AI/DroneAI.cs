@@ -21,7 +21,17 @@ public class DroneAI : MonoBehaviour
     void Start()
     {
         rb              = GetComponent<Rigidbody>();
-        players         = FindObjectsOfType<Player>().ToList().ConvertAll(x => x.gameObject);
+        
+        // Original code, David: players         = FindObjectsOfType<Player>().ToList().ConvertAll(x => x.gameObject);
+        // Intent, by Alejandro: 28/05/2023:   It is not optimized, takes too much of our CPUs in Start time:
+        // Get the players from the GameManager:
+        //
+        players = new List<GameObject>()
+        {
+            GameManager.Gm.PlayerToTheLeft,
+            GameManager.Gm.PlayerToTheRight
+        };
+
         _particleSystem = GetComponent<ParticleSystem>();
     }
 
@@ -73,7 +83,9 @@ public class DroneAI : MonoBehaviour
 
     private void DoMovement()
     {
-        if (players.Count == 2)
+        // Alejandro 2023/05/28:  I am fortifying (adding mover robustness...) to this Guard:
+        //
+        if ((players.Count <= 2) && (players[0] != null) && (players[1] != null))
         {
             var orderedPlayers = players.OrderBy(a => Vector3.Distance(a.gameObject.transform.position, transform.position)).ToList();
 

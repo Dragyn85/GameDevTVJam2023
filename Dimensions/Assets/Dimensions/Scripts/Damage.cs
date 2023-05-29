@@ -30,7 +30,7 @@ public class Damage : MonoBehaviour
 		if (damageOnTrigger)
 		{
 			
-			if (this.CompareTag("PlayerBullet") && collision.gameObject.CompareTag("Player"))	// if the player got hit with it's own bullets, ignore it
+			if (/*this.CompareTag("PlayerBullet") &&*/ collision.gameObject.CompareTag("Player"))	// if the player got hit with it's own bullets, ignore it
 				return;
 		
 			if (collision.gameObject.GetComponent<Health> () != null)
@@ -61,7 +61,7 @@ public class Damage : MonoBehaviour
 	{	
 		if (damageOnCollision)
 		{
-			if (this.CompareTag("PlayerBullet") && collision.gameObject.CompareTag("Player"))	// if the player got hit with it's own bullets, ignore it
+			if (/*this.CompareTag("PlayerBullet") &&*/ collision.gameObject.CompareTag("Player"))	// if the player got hit with it's own bullets, ignore it
 				return;
 		
 			if (collision.gameObject.GetComponent<Health> () != null)

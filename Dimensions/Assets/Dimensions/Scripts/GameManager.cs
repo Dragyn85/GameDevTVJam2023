@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour
 		{
 			case GameStates.Playing:
 				
-				if (!_healthOfPlayerToTheLeft.isAlive  &&  !_healthOfPlayerToTheRight.isAlive)
+				if (!_healthOfPlayerToTheLeft.isAlive  ||  !_healthOfPlayerToTheRight.isAlive)
 				{
 					// You  LOSE  the Game!
 					//

@@ -2257,7 +2257,8 @@ GameObject:
   - component: {fileID: 1779906714123631617}
   - component: {fileID: 5981426633340930059}
   - component: {fileID: 9105858737432838044}
-  m_Layer: 0
+  - component: {fileID: 60414574570190324}
+  m_Layer: 9
   m_Name: Jammo_Player_Base_Left
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2444,6 +2445,18 @@ MonoBehaviour:
   explosionPrefab: {fileID: 0}
   onLivesGone: 1
   LevelToLoad: 
+--- !u!114 &60414574570190324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2996487796932604921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d33931dc4f0ea4195a282021bb07eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3002809143865952156
 GameObject:
   m_ObjectHideFlags: 0
