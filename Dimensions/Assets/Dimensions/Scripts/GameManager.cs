@@ -174,7 +174,9 @@ public class GameManager : MonoBehaviour
 		// Set the current time to the startTime specified
 		//
 		_currentTime = startTime;
-			
+
+		_backgroundMusicAudioSource.volume = .05f;
+
 	}//End Awake
 
 
@@ -248,7 +250,7 @@ public class GameManager : MonoBehaviour
 				_backgroundMusicAudioSource.volume -= 0.01f;
 				if (_backgroundMusicAudioSource.volume<=0.0f)
 				{
-					AudioSource.PlayClipAtPoint (_beatLevelSFX,_backgroundMusicAudioSource.transform.position);
+					AudioSource.PlayClipAtPoint (_beatLevelSFX,_backgroundMusicAudioSource.transform.position, .5f);
 					
 					_gameState = GameStates.GameOver;
 
