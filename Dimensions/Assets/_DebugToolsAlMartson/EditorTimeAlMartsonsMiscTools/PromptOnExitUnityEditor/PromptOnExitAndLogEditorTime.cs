@@ -8,6 +8,7 @@ using UnityEngine;
 /// <summary>
 /// Shows a window to Prompt (YES / NO) before Exiting the Unity Editor.
 /// </summary>
+#if !UNITY_WEBGL
 public static class PromptOnExitAndLogEditorTime
 {
     #region Attributes
@@ -89,3 +90,4 @@ public static class PromptOnExitAndLogEditorTime
     #endregion Methods
     
 }// End Class PromptOnExitAndLogEditorTime
+#endif
