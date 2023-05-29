@@ -6,32 +6,39 @@ public class SpawnManager : MonoBehaviour
 {
     // The GameObject to instantiate.
     [SerializeField] private GameObject entityToSpawn;
-    [SerializeField] private int        numEntitiesToSpawn;
+    //[SerializeField] private int        numEntitiesToSpawn;
+    [SerializeField] private float      yOffset = 1;
 
     // An instance of the ScriptableObject defined above.
-    public Transform[] spawnPoints;
+    [SerializeField] internal SpawnPoint[] spawnPoints;
 
     // This will be appended to the name of the created entities and increment when each is created.
     int instanceNumber = 1;
 
     void Start()
     {
+        FindSpawnPoints();
         SpawnEntities();
     }
+
+    private void FindSpawnPoints()
+    {
+        spawnPoints = GameObject.FindObjectsOfType<SpawnPoint>();
+    }
+
 
     void SpawnEntities()
     {
         int currentSpawnPointIndex = 0;
 
-        for (int i = 0; i < numEntitiesToSpawn; i++)
+        // for (int i = 0; i < numEntitiesToSpawn; i++)
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            // Creates an instance of the prefab at the current spawn point.
-            GameObject currentEntity = Instantiate(entityToSpawn, spawnPoints[currentSpawnPointIndex].position, Quaternion.identity);
+            var spawnPos = spawnPoints[currentSpawnPointIndex].transform.position;
+            spawnPos.y += yOffset;
 
-            // Sets the name of the instantiated entity to be the string defined in the ScriptableObject and then appends it with a unique number. 
+            GameObject currentEntity = Instantiate(entityToSpawn, spawnPos, Quaternion.identity);
             currentEntity.name = entityToSpawn.name + instanceNumber;
-
-            // Moves to the next spawn point index. If it goes out of range, it wraps back to the start.
             currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnPoints.Length;
 
             instanceNumber++;
