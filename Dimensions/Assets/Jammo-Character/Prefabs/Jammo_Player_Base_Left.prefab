@@ -2256,6 +2256,7 @@ GameObject:
   - component: {fileID: 6535924620623803695}
   - component: {fileID: 1779906714123631617}
   - component: {fileID: 5981426633340930059}
+  - component: {fileID: 9105858737432838044}
   m_Layer: 0
   m_Name: Jammo_Player_Base_Left
   m_TagString: Player
@@ -2302,7 +2303,7 @@ Transform:
   - {fileID: 6746482546396881664}
   - {fileID: 3723773819697352768}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8161916564685696144
 Animator:
@@ -2410,6 +2411,7 @@ MonoBehaviour:
   scaleSpeed: 10
   minScale: 0.33
   maxScale: 3
+  useStartScale: 0
   startScale: 1
 --- !u!114 &5981426633340930059
 MonoBehaviour:
@@ -2423,7 +2425,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627819633a115f2a3a65aa95aefe86d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myDefaultVar: 0
+--- !u!114 &9105858737432838044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2996487796932604921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4668047099e98b2ab4e63db8c626850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPoints: 1
+  respawnHealthPoints: 1
+  numberOfLives: 1
+  isAlive: 1
+  explosionPrefab: {fileID: 0}
+  onLivesGone: 1
+  LevelToLoad: 
 --- !u!1 &3002809143865952156
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4835259663902524658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1740849147234934282}
+  - component: {fileID: 7289499986811474206}
+  m_Layer: 0
+  m_Name: GameManagerLevel_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1740849147234934282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4835259663902524658}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7289499986811474206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4835259663902524658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59206e7c39205d6078a3b30359175112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerToTheLeft: {fileID: 2780743476921861289, guid: 4b5eec8c3335d6c4f9ff9d338338c8aa,
+    type: 3}
+  _playerToTheRight: {fileID: 5101831619084508095, guid: 2ea665ea4b48c77bdbc5519d40660b44,
+    type: 3}
+  _gameState: 0
+  _score: 0
+  _canBeatLevel: 1
+  _beatLevelScore: 1000
+  _mainCanvas: {fileID: 5601581942454465986, guid: d2c841a204dac442b98f3acbc318045e,
+    type: 3}
+  _mainScoreDisplay: {fileID: 0}
+  _gameOverCanvas: {fileID: 1771376754762948602, guid: a1ebe157ad25fbcf0a3fe610e8713aea,
+    type: 3}
+  _gameOverScoreDisplay: {fileID: 0}
+  _beatLevelCanvas: {fileID: 0}
+  _beatLevelScoreDisplay: {fileID: 0}
+  _backgroundMusicAudioSource: {fileID: 0}
+  _gameOverSFX1: {fileID: 8300000, guid: ccd9bd39f8dea800391b09943762d996, type: 3}
+  _gameOverSFX2: {fileID: 8300000, guid: 173e7e627b4965177aba28dbadcacad3, type: 3}
+  _beatLevelSFX: {fileID: 8300000, guid: 212263d1ac66abf7c81e070d404cdf35, type: 3}
