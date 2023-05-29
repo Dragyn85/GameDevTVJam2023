@@ -196,15 +196,11 @@ public class DoorSwitchBehavior : MonoBehaviour
 	{
 		// Exit if there is a game manager and the game is over
 		//
-		// Todo Ale:  Add and Program the GameManager.cs  here
-		//
-		Debug.LogWarning($"Todo:  Add and Program the GameManager.cs  here.\n\n * door.SetActive(false); // Deactivate the door object.");
-		//
-		// if (GameManager.gm)
-		// {
-		// 	if (GameManager.gm.gameIsOver)
-		// 		return;
-		// }
+		if (GameManager.Gm)
+		{
+			if (GameManager.Gm.GameState == GameManager.GameStates.GameOver)
+				return;
+		}
 
 		if (other.CompareTag("Player"))
 		{
@@ -215,15 +211,12 @@ public class DoorSwitchBehavior : MonoBehaviour
 			ActivateDoorSwitch();
 			
 
-			// if game manager exists, make adjustments based on target properties
-			// if (GameManager.gm)
-			// {
-			// 	GameManager.gm.targetHit (scoreAmount, timeAmount);
-			// }
+			// if game manager exists, make adjustments based on target properties: Collect Points
 			//
-			// Todo Ale:  Add and Program the GameManager.cs  here
-			//
-			Debug.LogWarning($"Todo:  Add and Program the GameManager.cs  here.\n\n * If game manager exists, make adjustments based on target properties.");
+			if (GameManager.Gm)
+			{
+				GameManager.Gm.Collect(1);
+			}
 
 		}//End if (other.CompareTag("Player"))
 	}//End OnTriggerEnter

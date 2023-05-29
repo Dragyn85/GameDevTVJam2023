@@ -19,6 +19,21 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	public static GameManager Gm;
 
+	#region Timer Management
+
+	public float startTime = 5f;
+	
+	/// <summary>
+	/// Current time
+	/// </summary>
+	private float _currentTime;
+
+	/// <summary>
+	/// Show timer on screen
+	/// </summary>
+	public TextMeshProUGUI mainTimerDisplay;
+
+	#endregion Timer Management
 	
 	#region Players
 
@@ -142,7 +157,7 @@ public class GameManager : MonoBehaviour
 		_healthOfPlayerToTheRight = _playerToTheRight.GetComponent<Health>();
 
 		// setup score display
-		//Collect (0);
+		Collect (0);
 
 		// make other UI inactive
 		_gameOverCanvas.SetActive (false);
@@ -156,6 +171,9 @@ public class GameManager : MonoBehaviour
 			}
 		}
 		
+		// Set the current time to the startTime specified
+		//
+		_currentTime = startTime;
 			
 	}//End Awake
 
@@ -179,35 +197,31 @@ public class GameManager : MonoBehaviour
 				if (!_healthOfPlayerToTheLeft.isAlive  &&  !_healthOfPlayerToTheRight.isAlive)
 				{
 					// You  LOSE  the Game!
-					
-					// update gameState
-					_gameState = GameStates.Death;
+					//
+					EndGame();
 
-					// set the end game score
-					_gameOverScoreDisplay.text = _mainScoreDisplay.text;
-
-					// switch which GUI is showing		
-					_mainCanvas.SetActive (false);
-					_gameOverCanvas.SetActive (true);
 				}
 				else if (_canBeatLevel && _score>=_beatLevelScore)
 				{
 					// You  WIN  the Game!
+					//
+					BeatLevel();
+
+				}
+				else if (_currentTime < 0) 
+				{
+					// check to see if timer has run out
+					//
+					EndGame ();
+				} 
+				else 
+				{
+					// game playing state, so update the timer
+				
+					_currentTime -= Time.deltaTime;
+					mainTimerDisplay.text = _currentTime.ToString ("0");
 					
-					// update gameState
-					_gameState = GameStates.BeatLevel;
-
-					// hide the player so game doesn't continue playing
-					_playerToTheLeft.SetActive(false);
-
-					// set the end game score
-					_beatLevelScoreDisplay.text = _mainScoreDisplay.text;
-
-					// switch which GUI is showing			
-					_mainCanvas.SetActive (false);
-					_beatLevelCanvas.SetActive (true);
-					
-				}// GameStates.Playing
+				}//End GameStates.Playing
 				
 				break;
 			
@@ -432,6 +446,23 @@ public class GameManager : MonoBehaviour
 		// if (_musicAudioSource)
 		// 	_musicAudioSource.pitch = 0.5f; // slow down the music
 
+		
+		// You  LOSE  the Game!
+					
+		// update gameState
+		_gameState = GameStates.Death;
+
+		// set the end game score
+		// Not necessary, the prefab already has a Good Text to show: _gameOverScoreDisplay.text = _mainScoreDisplay.text;
+
+		// switch which GUI is showing		
+		_mainCanvas.SetActive (false);
+		_gameOverCanvas.SetActive (true);
+		
+		// // reduce the pitch of the background music, if it is set 
+		// if (_backgroundMusicAudioSource != null)
+		// 	_backgroundMusicAudioSource.pitch = 0.5f; // slow down the music
+		
 	}// End EndGame
 	
 	
@@ -461,6 +492,22 @@ public class GameManager : MonoBehaviour
 		// // reduce the pitch of the background music, if it is set 
 		// if (_musicAudioSource)
 		// 	_musicAudioSource.pitch = 0.5f; // slow down the music
+		
+		// You  WIN  the Game!
+					
+		// update gameState
+		_gameState = GameStates.BeatLevel;
+
+		// hide the player so game doesn't continue playing
+		_playerToTheLeft.SetActive(false);
+		_playerToTheRight.SetActive(false);
+
+		// set the end game score
+		// Not necessary, the prefab already has a Good Text to show: _beatLevelScoreDisplay.text = _mainScoreDisplay.text;
+
+		// switch which GUI is showing			
+		_mainCanvas.SetActive (false);
+		_beatLevelCanvas.SetActive (true);
 		
 	}// End BeatLevel
 
@@ -529,6 +576,36 @@ public class GameManager : MonoBehaviour
 	}
 
 	#endregion Sound Utils
+
+	#region Collect Point to win the game
+
+	public void Collect(int amount)
+	{
+		_score += amount;
+
+		// Original version
+		// if (_canBeatLevel)
+		// {
+		// 	_mainScoreDisplay.text = _score.ToString () + " of "+_beatLevelScore.ToString ();
+		// }
+		// else
+		// {
+		// 	_mainScoreDisplay.text = _score.ToString ();
+		// }
+
+		// Custom Code Here:
+		//
+		if (_canBeatLevel)
+		{
+			// _mainScoreDisplay.text = _score.ToString () + " of "+_beatLevelScore.ToString ();
+		}
+		else
+		{
+			// _mainScoreDisplay.text = _score.ToString ();
+		}
+	}// End Collect
+
+	#endregion Collect Point to win the game
 	
 	#endregion My Custom Methods
 }

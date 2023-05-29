@@ -83,6 +83,11 @@ PrefabInstance:
       propertyPath: albedoList.Array.data[2]
       value: 
       objectReference: {fileID: 2800000, guid: c9fd4ccfc3404b04eae3cd87e40a8e2e, type: 3}
+    - target: {fileID: 9105858737432838044, guid: 4fb98ec4d747efca0880ca8f478206b3,
+        type: 3}
+      propertyPath: numberOfLives
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fb98ec4d747efca0880ca8f478206b3, type: 3}

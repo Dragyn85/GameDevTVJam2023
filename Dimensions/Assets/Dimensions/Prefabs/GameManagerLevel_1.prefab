@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7289499986811474206
 MonoBehaviour:
@@ -44,19 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59206e7c39205d6078a3b30359175112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerToTheLeft: {fileID: 2780743476921861289, guid: 4b5eec8c3335d6c4f9ff9d338338c8aa,
-    type: 3}
-  _playerToTheRight: {fileID: 5101831619084508095, guid: 2ea665ea4b48c77bdbc5519d40660b44,
-    type: 3}
+  startTime: 30
+  mainTimerDisplay: {fileID: 0}
+  _playerToTheLeft: {fileID: 0}
+  _playerToTheRight: {fileID: 0}
   _gameState: 0
   _score: 0
   _canBeatLevel: 1
   _beatLevelScore: 1000
-  _mainCanvas: {fileID: 5601581942454465986, guid: d2c841a204dac442b98f3acbc318045e,
-    type: 3}
+  _mainCanvas: {fileID: 0}
   _mainScoreDisplay: {fileID: 0}
-  _gameOverCanvas: {fileID: 1771376754762948602, guid: a1ebe157ad25fbcf0a3fe610e8713aea,
-    type: 3}
+  _gameOverCanvas: {fileID: 0}
   _gameOverScoreDisplay: {fileID: 0}
   _beatLevelCanvas: {fileID: 0}
   _beatLevelScoreDisplay: {fileID: 0}

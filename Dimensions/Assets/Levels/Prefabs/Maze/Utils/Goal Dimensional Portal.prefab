@@ -127,6 +127,8 @@ GameObject:
   - component: {fileID: 437488400561957166}
   - component: {fileID: 3440238687736056636}
   - component: {fileID: 3288030787207460684}
+  - component: {fileID: 6313069044982871063}
+  - component: {fileID: 3117752770636324814}
   m_Layer: 0
   m_Name: Goal Dimensional Portal
   m_TagString: Untagged
@@ -213,3 +215,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &6313069044982871063
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239774192259859297}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.77
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3117752770636324814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239774192259859297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3215a8508ee7a6f83af835063c263b05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 500
+  explosionPrefab: {fileID: 0}
+  _destroyThisGameObject: 0
