@@ -1782,6 +1782,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cameras
       objectReference: {fileID: 0}
+    - target: {fileID: 5436191325431970572, guid: 2cd82d0553fcada039d96ea1ce40225e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5436191325431970575, guid: 2cd82d0553fcada039d96ea1ce40225e,
         type: 3}
       propertyPath: m_RootOrder
@@ -2293,6 +2298,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7939701958061538532, guid: 81dcb9a1f42045f5c9575f2bfce8dbc6,
+        type: 3}
+      propertyPath: LevelToLoad
+      value: Level_4 (David)
+      objectReference: {fileID: 0}
     - target: {fileID: 7939701958061538534, guid: 81dcb9a1f42045f5c9575f2bfce8dbc6,
         type: 3}
       propertyPath: m_fontColor.a
