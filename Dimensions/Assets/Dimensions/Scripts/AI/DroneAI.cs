@@ -52,7 +52,7 @@ public class DroneAI : MonoBehaviour
         }
     }
 
-    private void StunDrone()
+    public void StunDrone()
     {
         stunTime = STUN_TIME;
         _particleSystem.Play();

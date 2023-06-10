@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ" <br />
 /// With a blend tree to control the inputmagnitude and allow blending between animations. <br />
 /// </summary>
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody))]
 public class MovementInput : MonoBehaviour
 {
 
@@ -15,17 +16,17 @@ public class MovementInput : MonoBehaviour
     [SerializeField]
     private bool _invertHorizontalDirectionMovement = false;
 
-	public float InputX;
-	public float InputZ;
-	public Vector3 desiredMoveDirection;
-	public bool blockRotationPlayer;
-	public float desiredRotationSpeed = 0.1f;
-	public Animator anim;
-	public float Speed;
-	public float allowPlayerRotation = 0.1f;
-	public Camera cam;
-	public CharacterController controller;
-	public bool isGrounded;
+	public float     InputX;
+	public float     InputZ;
+	public Vector3   desiredMoveDirection;
+	public bool      blockRotationPlayer;
+	public float     desiredRotationSpeed = 0.1f;
+	public Animator  anim;
+	public float     Speed;
+	public float     allowPlayerRotation = 0.1f;
+	public Camera    cam;
+	public Rigidbody rigidbody;
+	public bool      isGrounded;
 
     [Header("Animation Smoothing")]
     [Range(0, 1f)]
@@ -47,7 +48,7 @@ public class MovementInput : MonoBehaviour
     {
 	    anim = this.GetComponent<Animator> ();
 	    cam = Camera.main;
-	    controller = this.GetComponent<CharacterController> ();
+	    rigidbody = this.GetComponent<Rigidbody> ();
     }
     
     //// Use this for initialization
@@ -55,7 +56,7 @@ public class MovementInput : MonoBehaviour
 	// {
 	// 	anim = this.GetComponent<Animator> ();
 	// 	cam = Camera.main;
-	// 	controller = this.GetComponent<CharacterController> ();
+	// 	rigidbody = this.GetComponent<CharacterController> ();
 	// }
 	
 	
@@ -64,7 +65,8 @@ public class MovementInput : MonoBehaviour
 	{
 		InputMagnitude();
 
-        isGrounded = controller.isGrounded;
+		/*			ToDo: implement
+        isGrounded = rigidbody.isGrounded;
         if (isGrounded)
         {
             verticalVel -= 0;
@@ -73,8 +75,11 @@ public class MovementInput : MonoBehaviour
         {
             verticalVel -= 1;
         }
+		
         _moveVector = new Vector3(0, verticalVel * .2f * Time.deltaTime, 0);
-        controller.Move(_moveVector);
+        
+        rigidbody.MovePosition(_moveVector);
+        */
 
 	}// End Update
 
@@ -99,10 +104,18 @@ public class MovementInput : MonoBehaviour
 		//
 		desiredMoveDirection = forward * InputZ + right * InputX;
 
+		var grounded = Physics.Raycast(transform.position, Vector3.down, 1);
+
+		if (grounded)
+		{
+			var vel = desiredMoveDirection * Velocity;
+			rigidbody.velocity = vel;
+		}
+
 		if (blockRotationPlayer == false)
 		{
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
-            controller.Move(desiredMoveDirection * (Time.deltaTime * Velocity));
+			rigidbody.angularVelocity = Vector3.zero;
 		}
 	}
 
