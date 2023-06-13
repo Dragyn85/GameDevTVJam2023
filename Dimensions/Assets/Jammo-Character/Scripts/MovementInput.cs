@@ -21,8 +21,11 @@ public class MovementInput : MonoBehaviour
 	public Vector3   desiredMoveDirection;
 	public bool      blockRotationPlayer;
 	public float     desiredRotationSpeed = 0.1f;
-	public Animator  anim;
-	public float     Speed;
+	
+	[FormerlySerializedAs("anim")]
+	public Animator  animator;
+	
+	public float     speed;
 	public float     allowPlayerRotation = 0.1f;
 	public Camera    cam;
 	public Rigidbody rigidbody;
@@ -38,6 +41,9 @@ public class MovementInput : MonoBehaviour
     [Range(0, 1f)]
     public float StopAnimTime = 0.15f;
     
+    /// <summary>
+    /// Animation Hash name. It's better (than using the "string name") for Performance.
+    /// </summary>
     private static readonly int _Blend = Animator.StringToHash("Blend");
 
     public float verticalVel;
@@ -46,7 +52,7 @@ public class MovementInput : MonoBehaviour
     
     void Awake ()
     {
-	    anim = this.GetComponent<Animator> ();
+	    animator = this.GetComponent<Animator> ();
 	    cam = Camera.main;
 	    rigidbody = this.GetComponent<Rigidbody> ();
     }
@@ -63,33 +69,20 @@ public class MovementInput : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		InputMagnitude();
 
-		/*			ToDo: implement
-        isGrounded = rigidbody.isGrounded;
-        if (isGrounded)
-        {
-            verticalVel -= 0;
-        }
-        else
-        {
-            verticalVel -= 1;
-        }
-		
-        _moveVector = new Vector3(0, verticalVel * .2f * Time.deltaTime, 0);
-        
-        rigidbody.MovePosition(_moveVector);
-        */
+		InputMagnitude();
 
 	}// End Update
 
+	
+	/// <summary>
+	/// Calculates the variables and make the Player to Physically "Move" in the Scene. <br /> <br />
+	/// Precondition:  GetInputXZAndSetHorizontalDirectionOfMovement()  was already called beforehand.
+	/// </summary>
     void PlayerMoveAndRotation()
     {
-	    // Get input from Keyboard
-	    //
-		GetInputXZAndSetHorizontalDirectionOfMovement();
 
-		// Original code:   var camera = Camera.main;
+	    // Original code:   var camera = Camera.main;
 		var transform1 = cam.transform;
 		var forward = transform1.forward;
 		var right = transform1.right;
@@ -104,12 +97,11 @@ public class MovementInput : MonoBehaviour
 		//
 		desiredMoveDirection = forward * InputZ + right * InputX;
 
-		var grounded = Physics.Raycast(transform.position, Vector3.down, 1);
+		isGrounded = (desiredMoveDirection.y == 0.0f);   // Old version: Physics.Raycast(transform.position, Vector3.down, 1);
 
-		if (grounded)
+		if (isGrounded)
 		{
-			var vel = desiredMoveDirection * Velocity;
-			rigidbody.velocity = vel;
+			rigidbody.velocity = desiredMoveDirection * Velocity;
 		}
 
 		if (blockRotationPlayer == false)
@@ -119,6 +111,9 @@ public class MovementInput : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Gets the Player's Input.
+	/// </summary>
     private void GetInputXZAndSetHorizontalDirectionOfMovement()
     {
 	    InputX = Input.GetAxis("Horizontal");
@@ -156,7 +151,7 @@ public class MovementInput : MonoBehaviour
 
 	void InputMagnitude()
 	{
-		// Get input from Keyboard
+		// Get input from (...the Player's...) Keyboard
 		//
 		GetInputXZAndSetHorizontalDirectionOfMovement();
 
@@ -165,18 +160,26 @@ public class MovementInput : MonoBehaviour
 
 		// Calculate the Input Magnitude
 		//
-		Speed = new Vector2(InputX, InputZ).sqrMagnitude;
+		speed = new Vector2(InputX, InputZ).sqrMagnitude;
 
         // Physically move player
 		//
-		if (Speed > allowPlayerRotation)
+		if (speed > allowPlayerRotation)
 		{
-			anim.SetFloat (_Blend, Speed, StartAnimTime, Time.deltaTime);
+
+			// Set the correct  Animation
+			//
+			animator.SetFloat (_Blend, speed, StartAnimTime, Time.deltaTime);
+			
+			// Move the Player
+			//
 			PlayerMoveAndRotation ();
 		}
-		else if (Speed < allowPlayerRotation)
+		else if (speed < allowPlayerRotation)
 		{
-			anim.SetFloat (_Blend, Speed, StopAnimTime, Time.deltaTime);
+			// Set the correct  Animation
+			//
+			animator.SetFloat (_Blend, speed, StopAnimTime, Time.deltaTime);
 		}
 	}
 }

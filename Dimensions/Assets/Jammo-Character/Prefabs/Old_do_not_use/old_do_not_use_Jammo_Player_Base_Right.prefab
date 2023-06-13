@@ -4469,7 +4469,7 @@ GameObject:
   - component: {fileID: 441056975707660286}
   - component: {fileID: 3631745962506774848}
   m_Layer: 0
-  m_Name: Jammo_Player_Base_Right
+  m_Name: old_do_not_use_Jammo_Player_Base_Right
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
