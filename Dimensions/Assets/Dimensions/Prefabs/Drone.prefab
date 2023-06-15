@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 3525127960962168185}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.252}
 --- !u!114 &2434616778005149597
 MonoBehaviour:
@@ -4863,6 +4863,7 @@ GameObject:
   - component: {fileID: 523577135046949596}
   - component: {fileID: 2351136191097441814}
   - component: {fileID: 4312377088832633540}
+  - component: {fileID: 3507142455269377760}
   m_Layer: 8
   m_Name: drone
   m_TagString: Untagged
@@ -4944,8 +4945,21 @@ MeshCollider:
   m_GameObject: {fileID: 4296457789343150019}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8251302285044789390, guid: 5f547da8b4bcfd942a0194818f7fb589, type: 3}
+--- !u!135 &3507142455269377760
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4296457789343150019}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.333
+  m_Center: {x: 0, y: 0.22370403, z: 0}
