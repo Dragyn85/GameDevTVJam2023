@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
 	// Update is called once per frame
 	void Update()
-	{
+	{c
 		Enemies = FindObjectsOfType<DroneAI>().ToList().ConvertAll(x => x.gameObject);
 		
 		
