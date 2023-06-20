@@ -13,53 +13,26 @@ public class SceneObjectFinder : MonoBehaviour
 
         if (audioSources.Length == 0)
         {
-            EditorUtility.DisplayDialog("Results", "No audio sources without mixer group attached found", "ok");
             return;
         }
-
-        GameObject gameObject = new GameObject("AudioSource Finder");
-        var audioFinder = gameObject.AddComponent<SceneObjectFinder>();
-
-        audioFinder.InitalizeSearch(audioSources);
-    }
-
-    void InitalizeSearch(AudioSource[] audioSources)
-    {
-        StartCoroutine(CheckAllAudioSources(audioSources));
-    }
-
-    IEnumerator CheckAllAudioSources(AudioSource[] audioSources)
-    {
         foreach (var audioSource in audioSources)
         {
             bool continueToNext = false;
-            while (!continueToNext)
+
+
+            if (audioSource.outputAudioMixerGroup == null)
             {
+                Debug.Log(audioSource.gameObject);
+                Selection.activeObject = audioSource;
+                bool findNext = EditorUtility.DisplayDialog("Results", "Audio sources without mixer group attached found", "ok");
+                break;
 
-                if (audioSource.outputAudioMixerGroup == null)
-                {
-                    Debug.Log(audioSource.gameObject);
-                    Selection.activeObject = audioSource;
-                    bool findNext = EditorUtility.DisplayDialog("Continue search", "Would you like to continue searching AudioSources without mixer group", "yes");
-
-                    if (findNext)
-                    {
-                        continueToNext = true;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                else
-                {
-                    continueToNext = true;
-                }
-                yield return null;
 
             }
         }
-        DestroyImmediate(gameObject);
+
     }
+
+
 }
 #endif
