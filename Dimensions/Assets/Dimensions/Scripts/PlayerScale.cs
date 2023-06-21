@@ -1,30 +1,44 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
+/// <summary>
+/// This Script is used to change the Scale of a GameObject through code, when pressing an Input Button on the Keyboard <br />
+/// ( Input.GetKey(KeyCode.E) and Input.GetKey(KeyCode.Q) )
+/// </summary>
 public class PlayerScale : MonoBehaviour
 {
-    [SerializeField] private float scaleSpeed = 10f;
-    [SerializeField] private float minScale = 0.01f;
-    [SerializeField] private float maxScale = 100f;
 
+    [FormerlySerializedAs("scaleSpeed")]
+    [SerializeField] private float _scaleSpeed = 10f;
+    
+    [FormerlySerializedAs("minScale")]
+    [SerializeField] private float _minScale = 0.01f;
+    
+    [FormerlySerializedAs("maxScale")]
+    [SerializeField] private float _maxScale = 100f;
+
+    [FormerlySerializedAs("useStartScale")]
     [Tooltip("Do you want to use 'Start Scale'? FALSE means you are only starting from the size the Transform (i.e.: the SCALE) Component's values are now.")]
-    [SerializeField] private bool useStartScale = false;
+    [SerializeField]
+    private bool _useStartScale = false;
 
-    [SerializeField] private float startScale = 1f;
+    [FormerlySerializedAs("startScale")]
+    [SerializeField] private float _startScale = 1f;
 
     private float _currentScale;
 
     
     private void Awake()
     {
-        if (useStartScale)
+        if (_useStartScale)
         {
             // Use the value 'startScale'  in this script:
             //
-            _currentScale = startScale;
+            _currentScale = _startScale;
         }
         else
         {
-            // Use the Default Scale from this GameObjects' Transform:
+            // Use the Default Scale from this GameObjects' ('Scale' in the X-Axis) Transform:
             //
             _currentScale = transform.localScale.x;
         }
@@ -32,25 +46,41 @@ public class PlayerScale : MonoBehaviour
 
     void Update()
     {
-        // Change the Scale of the Character (GameObject) through code:
+        // Change the Scale of the Character (GameObject) through code,
+        //..when pressing an Input Button on the Keyboard:
         //
         if (Input.GetKey(KeyCode.E))
         {
-            _currentScale += scaleSpeed * Time.deltaTime;
-            _currentScale =  Mathf.Clamp(_currentScale, minScale, maxScale);
-            SetScale();
+            // Make it GROW (+) in Scale:
+            //
+            SetScale( 1 );
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            _currentScale -= scaleSpeed * Time.deltaTime;
-            _currentScale = Mathf.Clamp(_currentScale, minScale, maxScale);
-            transform.localScale = Vector3.one * _currentScale;
+            // Make it SHRINK (-) in Scale:
+            //
+            SetScale( -1 );
         }
     }
 
-    private void SetScale()
+    /// <summary>
+    /// Sets the value to "grow" or to "shrink" in this current time-frame, and applies it to: <br />
+    /// ...the 'GameObject' this Script Component is attached to.
+    /// </summary>
+    /// <param name="direction"></param>
+    private void SetScale(int direction)
     {
-        _currentScale = Mathf.Clamp(_currentScale, minScale, maxScale);
+        // Get the value to "grow" or to "shrink" in this current time-frame:
+        //
+        _currentScale += _scaleSpeed * Time.deltaTime * direction;
+
+        // Clamp the value to the Range:  [minScale, maxScale] 
+        //
+        _currentScale = Mathf.Clamp(_currentScale, _minScale, _maxScale);
+        
+        // Apply the change in 'Scale':
+        //
         transform.localScale = Vector3.one * _currentScale;
-    }
+
+    }// End SetScale
 }

@@ -9,6 +9,8 @@ using UnityEngine.Serialization;
 public class MovementInput : MonoBehaviour
 {
 
+	#region Attributes
+	
     public float Velocity;
     [Space]
     
@@ -49,6 +51,10 @@ public class MovementInput : MonoBehaviour
     public float verticalVel;
     private Vector3 _moveVector;
 
+    #endregion Attributes
+    
+    
+    #region Unity Methods
     
     void Awake ()
     {
@@ -58,22 +64,68 @@ public class MovementInput : MonoBehaviour
     }
     
     //// Use this for initialization
-	// void Start ()
-	// {
-	// 	anim = this.GetComponent<Animator> ();
-	// 	cam = Camera.main;
-	// 	rigidbody = this.GetComponent<CharacterController> ();
-	// }
+    // void Start ()
+    // {
+    // 	anim = this.GetComponent<Animator> ();
+    // 	cam = Camera.main;
+    // 	rigidbody = this.GetComponent<CharacterController> ();
+    // }
 	
 	
-	// Update is called once per frame
-	void Update () 
+    // Update is called once per frame
+    void Update () 
+    {
+
+	    InputMagnitude();
+
+    }// End Update
+
+    #endregion Unity Methods
+    
+	
+    #region Custom Methods
+    
+	void InputMagnitude()
 	{
 
-		InputMagnitude();
+		// Update the "_isGrounded" Boolean Flag  (i.e.: vertical position-state):
+		//
+		// Second version:  isGrounded = (rigidbody.velocity.y == 0.0f);   // Old version: Physics.Raycast(transform.position, Vector3.down, 1);
+		//		
+		isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.3f);
 
-	}// End Update
 
+		// Get input from (...the Player's...) Keyboard
+		//
+		GetInputXZAndSetHorizontalDirectionOfMovement();
+
+		//anim.SetFloat ("InputZ", InputZ, VerticalAnimTime, Time.deltaTime * 2f);
+		//anim.SetFloat ("InputX", InputX, HorizontalAnimSmoothTime, Time.deltaTime * 2f);
+
+		// Calculate the Input Magnitude
+		//
+		speed = new Vector2(InputX, InputZ).sqrMagnitude;
+
+		// Physically move player
+		//
+		if (speed > allowPlayerRotation)
+		{
+
+			// Set the correct  Animation
+			//
+			animator.SetFloat (_Blend, speed, StartAnimTime, Time.deltaTime);
+			
+			// Move the Player
+			//
+			PlayerMoveAndRotation ();
+		}
+		else if (speed < allowPlayerRotation)
+		{
+			// Set the correct  Animation
+			//
+			animator.SetFloat (_Blend, speed, StopAnimTime, Time.deltaTime);
+		}
+	}// End InputMagnitude
 	
 	/// <summary>
 	/// Calculates the variables and make the Player to Physically "Move" in the Scene. <br /> <br />
@@ -96,11 +148,11 @@ public class MovementInput : MonoBehaviour
 		// Here the Movement Direction is calculated:
 		//
 		desiredMoveDirection = forward * InputZ + right * InputX;
-
-		isGrounded = (desiredMoveDirection.y == 0.0f);   // Old version: Physics.Raycast(transform.position, Vector3.down, 1);
-
+		
 		if (isGrounded)
 		{
+			// Update the RigidBody's Horizontal Velocity (i.e.:  "Move"  the Player)
+			//
 			rigidbody.velocity = desiredMoveDirection * Velocity;
 		}
 
@@ -149,37 +201,6 @@ public class MovementInput : MonoBehaviour
         t.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
     }
 
-	void InputMagnitude()
-	{
-		// Get input from (...the Player's...) Keyboard
-		//
-		GetInputXZAndSetHorizontalDirectionOfMovement();
-
-		//anim.SetFloat ("InputZ", InputZ, VerticalAnimTime, Time.deltaTime * 2f);
-		//anim.SetFloat ("InputX", InputX, HorizontalAnimSmoothTime, Time.deltaTime * 2f);
-
-		// Calculate the Input Magnitude
-		//
-		speed = new Vector2(InputX, InputZ).sqrMagnitude;
-
-        // Physically move player
-		//
-		if (speed > allowPlayerRotation)
-		{
-
-			// Set the correct  Animation
-			//
-			animator.SetFloat (_Blend, speed, StartAnimTime, Time.deltaTime);
-			
-			// Move the Player
-			//
-			PlayerMoveAndRotation ();
-		}
-		else if (speed < allowPlayerRotation)
-		{
-			// Set the correct  Animation
-			//
-			animator.SetFloat (_Blend, speed, StopAnimTime, Time.deltaTime);
-		}
-	}
+    #endregion Custom Methods
+    
 }

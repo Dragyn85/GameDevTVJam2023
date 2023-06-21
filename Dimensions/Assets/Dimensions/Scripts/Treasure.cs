@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.Serialization;
 
+/// <summary>
+/// This is a class made for processing the Collection of any 'Pickup Items', such as: Coins, or Treasures. <br />
+/// It can also be used for setting a 'Finish Goal' that, once your Main Player takes it: the Game is Over.
+/// </summary>
 public class Treasure : MonoBehaviour
 {
 
@@ -12,7 +15,7 @@ public class Treasure : MonoBehaviour
 	
 	[Tooltip("Actor who will collide with this GameObject (i.e.: 'Player').")]
 	[SerializeField]
-	private string _collisionActorTag = "Player";
+	private string _collisionActorTag = $"Player";
 
 	
 	[Tooltip("Prefab VFX (or 'Particle System') to be spawned in-place, when the Collision with this Treasure happens.")]
@@ -38,7 +41,8 @@ public class Treasure : MonoBehaviour
 				// tell the game manager to Collect
 				GameManager.Gm.Collect (_value);
 				
-				// Make the Player Disappear, because he won (we don't want him to collect this Treasure multiple times..):
+				// Make the 'Player' Disappear: Disable it...
+				// ...because he won (we don't want him to collect this Treasure multiple times..):
 				//
 				other.gameObject.SetActive(false);
 			}
