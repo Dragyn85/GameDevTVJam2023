@@ -3,7 +3,7 @@ using UnityEngine.Serialization;
 
 /// <summary>
 /// This Script is used to change the Scale of a GameObject through code, when pressing an Input Button on the Keyboard <br />
-/// ( Input.GetKey(KeyCode.E) and Input.GetKey(KeyCode.Q) )
+/// ( Input.GetKey(KeyCode.E) and Input.GetKey(KeyCode.Q) ).
 /// </summary>
 public class PlayerScale : MonoBehaviour
 {
