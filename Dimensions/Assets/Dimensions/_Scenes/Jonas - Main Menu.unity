@@ -104,7 +104,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +117,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -182,8 +182,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Welcome to dimensions! \nHelp the scientists to getting these quantum
-    robots through the portal to a unified dimension. \n\nHow to play:\nMove:      
-    WASD/Arrows\nAct:           Space Key\nQ and E:   Scale player\n\nMade by:\nAlejandro,
+    robots through the portal to an unified dimension. \n\nHow to play:\nMove:      
+    WASD/Arrows\nShoot:       Space Key\nQ and E:    Scale player\n\nMade by:\nAlejandro,
     Github: https://github.com/almartson\n\nDavid, Github: https://github.com/DavidJH2\n\nJonas,
     Github: https://github.com/Dragyn85\n"
   m_isRightToLeft: 0
@@ -366,12 +366,12 @@ MonoBehaviour:
   m_margin: {x: 0.7607298, y: 0, z: -5.4096518, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 952335278}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &952335278
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -510,6 +510,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -643,14 +644,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 1
+  m_Version: 3
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
   m_LightLayerMask: 1
+  m_RenderingLayers: 1
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 1
 --- !u!1 &1879682016
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,6 +747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -785,7 +790,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1067736429418630710, guid: 221e4de062e03b4418e19298ea5334d8,
@@ -855,14 +860,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 221e4de062e03b4418e19298ea5334d8, type: 3}
 --- !u!1001 &4149527169978873810
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 22680175, guid: 5f9411b4a62fb3045b074f8671bdd208, type: 3}
@@ -1170,7 +1177,7 @@ PrefabInstance:
     - target: {fileID: 4149527170234145316, guid: 5f9411b4a62fb3045b074f8671bdd208,
         type: 3}
       propertyPath: orthographic size
-      value: 8.297157
+      value: 8.216981
       objectReference: {fileID: 0}
     - target: {fileID: 4149527170234145317, guid: 5f9411b4a62fb3045b074f8671bdd208,
         type: 3}
@@ -1318,5 +1325,51 @@ PrefabInstance:
       value: -4.2400002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4149527169093891687, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4149527169349363423, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 810482503, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1983645641, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1897003317, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 22680174, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3471903052743684228, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8148621439743120002, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 6791282943933572271, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3418560858796407719, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3826384867126823377, guid: 5f9411b4a62fb3045b074f8671bdd208,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 5f9411b4a62fb3045b074f8671bdd208, type: 3}
