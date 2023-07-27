@@ -6,8 +6,6 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
-
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] float volumeChangeSpeed;
 
@@ -18,19 +16,8 @@ public class AudioManager : MonoBehaviour
     string sfxVolumeParameter   = "SFXVolume";
 
     float volumePct;
+
     Dictionary<string, MixerParameter> audioMixerDict = new Dictionary<string, MixerParameter>();
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void Start()
     {
