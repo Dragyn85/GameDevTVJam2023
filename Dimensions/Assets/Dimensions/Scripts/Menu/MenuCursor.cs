@@ -22,8 +22,8 @@ public class MenuCursor : MonoBehaviour
     {
         leftAnimator = leftCursorTransform.GetComponentInChildren<Animator>();
         rightAnimator = rightCursorTransform.GetComponentInChildren<Animator>();
-        leftAnimator.SetTrigger("Normal");
-        rightAnimator.SetTrigger("Normal");
+        leftAnimator.SetTrigger("normal");
+        rightAnimator.SetTrigger("normal");
     }
     internal void AddIMenuItem(MainMenuItem mainMenuItem)
     {

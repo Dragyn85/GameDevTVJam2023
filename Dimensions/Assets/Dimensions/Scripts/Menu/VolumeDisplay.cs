@@ -1,12 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VolumeDisplay : MonoBehaviour
 {
     TMP_Text musicVolume;
     enum VolumeType { Music, SFX };
     AudioManager audioManager;
-
     [SerializeField] VolumeType volumeType;
     void Start()
     {
@@ -22,6 +22,7 @@ public class VolumeDisplay : MonoBehaviour
             audioManager.onSFXVolumeChanged += UpdateVolume;
         }
         UpdateVolume(audioManager.GetVolume());
+        
     }
 
     private void UpdateVolume(float volume)

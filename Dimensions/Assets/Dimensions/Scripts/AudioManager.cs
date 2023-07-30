@@ -32,9 +32,9 @@ public class AudioManager : MonoBehaviour
         }
 
         audioMixerDict[musicVolumeParameter].SetVolume(80);
-        onSFXVolumeChanged.Invoke(80);
+        onSFXVolumeChanged?.Invoke(80);
         audioMixerDict[sfxVolumeParameter].SetVolume(80);
-        onMusicVolumeChanged.Invoke(80);
+        onMusicVolumeChanged?.Invoke(80);
     }
 
     public void incrMusicVolume()
@@ -126,6 +126,7 @@ public class AudioManager : MonoBehaviour
         volumePct += 80;
         return volumePct;
     }
+
 }
 public class MixerParameter
 {
