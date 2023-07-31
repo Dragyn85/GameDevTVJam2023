@@ -25,7 +25,6 @@ public class AudioManager : ServiceBehaviour
     {
         audioMixerDict.Add(parameter, new MixerParameter(audioMixer, parameter));
         float volume = PlayerPrefs.GetFloat(parameter, 80);
-        Debug.Log(parameter+" "+PlayerPrefs.HasKey(parameter) +" volume:"+ volume);
         audioMixerDict[parameter].SetVolume(volume);
     }
 
