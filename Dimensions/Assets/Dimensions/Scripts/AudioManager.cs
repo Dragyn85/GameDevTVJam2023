@@ -76,18 +76,19 @@ public class AudioManager : ServiceBehaviour
         return Mathf.Log10(value);// * _multipier;
     }*/
 
-    public void ChangeVolume(string soundParameterName, float amount)
+    public void ChangeVolume(string soundParameterName, float pctAmount)
     {
         if (!audioMixerDict.ContainsKey(soundParameterName)) return;
 
         float currentVolume = GetVolume(soundParameterName);
-        SetVolume(soundParameterName, currentVolume + amount);
+        SetVolume(soundParameterName, currentVolume + pctAmount);
     }
-    public void SetVolume(string soundParameterName, float value)
+
+    public void SetVolume(string soundParameterName, float pctValue)
     {
         if (!audioMixerDict.ContainsKey(soundParameterName)) return;
 
-        audioMixerDict[soundParameterName].SetVolume(value);
+        audioMixerDict[soundParameterName].SetVolume(pctValue);
     }
 
     internal MixerParameter GetMixerParameter(string parameterName)
@@ -110,6 +111,7 @@ public class MixerParameter
 {
     AudioMixer audioMixer;
     string parameter;
+    float currentValue;
 
     public string Name => parameter;
 
@@ -121,17 +123,15 @@ public class MixerParameter
     }
     public float GetVolume()
     {
-         if (audioMixer.GetFloat(parameter, out float currentValue))
-        {
-            return currentValue + 80;
-        }
-        return -1;
+        return currentValue;
     }
     public void SetVolume(float perc)
     {
-        audioMixer.GetFloat(parameter, out float currentMixerValue);
-        perc = Mathf.Clamp(perc, 0, 100);
-        currentMixerValue = perc - 80;
+        //audioMixer.GetFloat(parameter, out float currentMixerValue);
+        perc = Mathf.Clamp(perc, 0.001f, 100);
+        float currentMixerValue = perc - 80;
+        currentValue = perc;
+        currentMixerValue = MathF.Log10(perc / 100) * 30f;
 
         audioMixer.SetFloat(parameter, currentMixerValue);
         ParameterChanged?.Invoke(perc, this);

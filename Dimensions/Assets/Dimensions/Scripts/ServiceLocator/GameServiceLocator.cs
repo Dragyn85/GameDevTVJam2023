@@ -15,9 +15,10 @@ public class GameServiceLocator : MonoBehaviour
     private void Awake()
     {
         if (!spawned)
-        {
+        {   
             var instance = Instantiate(persitingServiceContainerPrefab);
             DontDestroyOnLoad(instance);
+            spawned = true;
         }
     }
 
