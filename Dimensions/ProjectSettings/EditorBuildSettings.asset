@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Dimensions/_Scenes/Jonas - Main Menu.unity
+    path: Assets/Dimensions/_Scenes/Main Menu.unity
     guid: 5751ffe93d486884d879467b2653f389
   - enabled: 1
     path: Assets/Dimensions/_Scenes/Level_1.unity

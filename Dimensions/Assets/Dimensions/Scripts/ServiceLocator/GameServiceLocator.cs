@@ -1,14 +1,17 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameServiceLocator : MonoBehaviour
 {
-    Dictionary<Type, MonoBehaviour> servicesDictionray = new Dictionary<Type, MonoBehaviour>();
-    bool spawned = false;
-    [SerializeField] GameObject persitingServiceContainerPrefab = null;
+    Dictionary<Type, ServiceBehaviour> servicesDictionray = new Dictionary<Type, ServiceBehaviour>();
+    static bool spawned = false;
+    [SerializeField] GameObject persitingServiceContainerPrefab = null; 
 
+    public static GameServiceLocator GetInstance()
+    {
+        return GameObject.FindGameObjectWithTag("ServiceLocator").GetComponent<GameServiceLocator>();
+    }
     private void Awake()
     {
         if (!spawned)
@@ -18,10 +21,11 @@ public class GameServiceLocator : MonoBehaviour
         }
     }
 
-    public T GetService<T>() where T : MonoBehaviour
+    public T GetService<T>() where T : ServiceBehaviour
     {
-        if(servicesDictionray.TryGetValue(typeof(T),out MonoBehaviour MonoService))
+        if(servicesDictionray.TryGetValue(typeof(T),out ServiceBehaviour MonoService))
         {
+            MonoService.InitializeServiece();
             return (T)MonoService;
         }
 
@@ -29,6 +33,7 @@ public class GameServiceLocator : MonoBehaviour
 
         if(service != null)
         {
+            service.InitializeServiece();
             RegistrerService<T>(service);
         }
         if(service == null)
@@ -39,7 +44,7 @@ public class GameServiceLocator : MonoBehaviour
         return (T)service;
     }
 
-    public void RegistrerService<T>(T service) where T: MonoBehaviour
+    public void RegistrerService<T>(T service) where T: ServiceBehaviour
     {
         if (servicesDictionray.ContainsKey(typeof(T))) return;
 

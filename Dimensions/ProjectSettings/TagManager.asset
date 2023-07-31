@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerEyes
+  - Wall
+  - ServiceLocator
   layers:
   - Default
   - TransparentFX
