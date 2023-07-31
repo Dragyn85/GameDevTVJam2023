@@ -105,6 +105,12 @@ public class AudioManager : ServiceBehaviour
 
         MixerParameter.ParameterChanged += HandleSFXVolumeChanged;
     }
+
+    internal float GetVolumeRaw(string parameter)
+    {
+        audioMixer.GetFloat(parameter, out float volume);
+        return volume;
+    }
 }
 public class MixerParameter
 {

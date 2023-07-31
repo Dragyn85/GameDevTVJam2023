@@ -8,8 +8,6 @@ public class PauseMenuVolumeSlider : MonoBehaviour
     [SerializeField] private string _soundParameterName;
     [SerializeField] AudioMixer _mixer;
     [SerializeField] Slider _slider;
-    [SerializeField] private float _multipier = 30f;
-
 
     private void Start()
     {
