@@ -356,7 +356,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -442.75146, y: -280.2505}
+  m_AnchoredPosition: {x: -538, y: -274}
   m_SizeDelta: {x: 284.4971, y: 71.4991}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3886211537120733079
@@ -898,7 +898,7 @@ RectTransform:
   m_Children:
   - {fileID: 3886211538557277817}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -922,6 +922,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -1098,7 +1099,7 @@ MonoBehaviour:
   _soundParameterName: MusicVolume
   _mixer: {fileID: 24100000, guid: 375d15b1c1faf74459e7c6ae1a18d241, type: 2}
   _slider: {fileID: 3886211537923507087}
-  _multipier: 100
+  _multipier: 30
 --- !u!1 &3886211537983596985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,8 +1505,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -499.99997, y: -300}
+  m_AnchoredPosition: {x: -15.894, y: 0}
+  m_SizeDelta: {x: -417.3512, y: -369.9335}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3886211538557277823
 CanvasRenderer:

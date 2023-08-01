@@ -20,6 +20,8 @@ public class ToggleCanvas : MonoBehaviour
             cg.alpha = cg.alpha == 0 ? 1 : 0;
             cg.interactable = !cg.interactable;
             cg.blocksRaycasts = !cg.blocksRaycasts;
+            bool stopTime = !cg.interactable;
+            Time.timeScale = stopTime ? 1 : 0;
         }
     }
 }

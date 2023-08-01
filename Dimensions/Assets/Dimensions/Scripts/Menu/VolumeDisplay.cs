@@ -1,29 +1,43 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VolumeDisplay : MonoBehaviour
 {
     TMP_Text musicVolume;
+
     enum VolumeType { Music, SFX };
+    AudioManager audioManager;
 
     [SerializeField] VolumeType volumeType;
-    void Start()
+    string parameterName;
+    private void Awake()
     {
-        musicVolume = GetComponent<TMP_Text>();
         if (volumeType == VolumeType.Music)
         {
-            AudioManager.Instance.onMusicVolumeChanged += UpdateVolume;
+            parameterName = "MusicVolume";
         }
-        else
+        if (volumeType == VolumeType.SFX)
         {
-            AudioManager.Instance.onSFXVolumeChanged += UpdateVolume;
+            parameterName = "SFXVolume";
         }
-        UpdateVolume(AudioManager.Instance.GetVolume());
+        
+    }
+    void Start()
+    {
+        audioManager = FindObjectOfType<GameServiceLocator>().GetService<AudioManager>();
+        musicVolume = GetComponent<TMP_Text>();
+        audioManager.onAnyVolumeChanged += UpdateVolume;
+        float volume = audioManager.GetVolume(parameterName);
+        MixerParameter mp = audioManager.GetMixerParameter(parameterName);
+        UpdateVolume(volume, mp);
     }
 
-    private void UpdateVolume(float volume)
+    private void UpdateVolume(float volume, MixerParameter parameter)
     {
+           if (parameter.Name != parameterName) { return; }
+
         musicVolume.SetText(volume.ToString("0") + "%");
     }
-
 }

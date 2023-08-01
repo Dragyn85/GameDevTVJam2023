@@ -250,7 +250,9 @@ public class GameManager : MonoBehaviour
 				_backgroundMusicAudioSource.volume -= 0.01f;
 				if (_backgroundMusicAudioSource.volume<=0.0f)
 				{
-					AudioSource.PlayClipAtPoint (_beatLevelSFX,_backgroundMusicAudioSource.transform.position, .08f);
+					float rawVolume = GameServiceLocator.GetInstance().GetService<AudioManager>().GetSoundNormalizedParameterValue("SFXVolume");
+
+                    AudioSource.PlayClipAtPoint (_beatLevelSFX,_backgroundMusicAudioSource.transform.position, rawVolume);
 					
 					_gameState = GameStates.GameOver;
 
